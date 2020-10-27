@@ -1,3 +1,5 @@
+![Beer](img/noun_Beer_23573.png)
+
 Simple FastAPI example following Calmcode
 ----------
 
