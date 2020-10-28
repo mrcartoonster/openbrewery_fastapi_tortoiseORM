@@ -1,64 +1,44 @@
-aerich==0.3.2
-aiofiles==0.5.0
-aiosqlite==0.15.0
-aniso8601==7.0.0
-async-exit-stack==1.0.1
-async-generator==1.10
-asyncpg==0.21.0
-atomicwrites==1.4.0; sys_platform == "win32"
-attrs==20.2.0
-certifi==2020.6.20
-chardet==3.0.4
-click==7.1.2
-colorama==0.4.4; platform_system == "Windows"
-colorful==0.5.4
-coverage==5.3
-dnspython==2.0.0
-email-validator==1.1.1
-fastapi==0.61.1
-graphene==2.1.8
-graphql-core==2.3.2
-graphql-relay==2.0.1
-h11==0.9.0
-httptools==0.1.1; sys_platform != "win32" and sys_platform != "cygwin" and platform_python_implementation != "PyPy"
-idna==2.10
-iniconfig==1.1.1
-iso8601==0.1.13
-itsdangerous==1.1.0
-jinja2==2.11.2
-markupsafe==1.1.1
-orjson==3.4.1
-packaging==20.4
-pillow==8.0.1
-pluggy==0.13.1
-prettyprinter==0.18.0
-promise==2.3
-psycopg2-binary==2.8.6
-py==1.9.0
-pydantic==1.7
-pygments==2.7.2
-pyparsing==2.4.7
-pypika==0.42.1
-pytest==6.1.1
-pytest-clarity==0.3.0a0
-pytest-cov==2.10.1
-pytest-emoji==0.2.0
-pytest-html==2.1.1
-pytest-metadata==1.10.0
-pytest-picked==0.4.4
-python-multipart==0.0.5
-pyyaml==5.3.1
+aerich==0.3.2; python_version >= "3.7" and python_version < "4.0"
+aiofiles==0.5.0; python_version >= "3.6"
+aiosqlite==0.15.0; python_version >= "3.7" and python_version < "4.0"
+aniso8601==7.0.0; python_version >= "3.6"
+async-exit-stack==1.0.1; python_version >= "3.6"
+async-generator==1.10; python_version >= "3.6"
+asyncpg==0.21.0; python_full_version >= "3.5.0"
+certifi==2020.6.20; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.5.0"
+chardet==3.0.4; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.5.0"
+click==7.1.2; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.5.0"
+colorama==0.4.4; python_version >= "2.7" and python_full_version < "3.0.0" and platform_system == "Windows" or python_full_version >= "3.5.0" and platform_system == "Windows"
+dnspython==2.0.0; python_version >= "3.6"
+email-validator==1.1.1; python_version >= "3.6"
+fastapi==0.61.1; python_version >= "3.6"
+graphene==2.1.8; python_version >= "3.6"
+graphql-core==2.3.2; python_version >= "3.6"
+graphql-relay==2.0.1; python_version >= "3.6"
+h11==0.9.0; python_version >= "3.6"
+httptools==0.1.1; sys_platform != "win32" and sys_platform != "cygwin" and platform_python_implementation != "PyPy" and python_version >= "3.6"
+idna==2.10; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.5.0"
+iso8601==0.1.13; python_version >= "3.7" and python_version < "4.0"
+itsdangerous==1.1.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.4.0"
+jinja2==2.11.2; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.5.0"
+markupsafe==1.1.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.5.0"
+orjson==3.4.1; python_version >= "3.6"
+pillow==8.0.1; python_version >= "3.6"
+promise==2.3; python_version >= "3.6"
+psycopg2-binary==2.8.6; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.4.0")
+pydantic==1.7; python_version >= "3.7" and python_version < "4.0"
+pypika==0.42.1; python_version >= "3.7" and python_version < "4.0"
+python-multipart==0.0.5; python_version >= "3.6"
+pyyaml==5.3.1; python_version >= "3.6"
 qrcode==6.1
-requests==2.24.0
-rx==1.6.1
-six==1.15.0
-starlette==0.13.6
-termcolor==1.1.0
-toml==0.10.1
+requests==2.24.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.5.0"
+rx==1.6.1; python_version >= "3.6"
+six==1.15.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.3.0"
+starlette==0.13.6; python_version >= "3.6"
 tortoise-orm==0.16.17
-typing-extensions==3.7.4.3
-ujson==3.2.0
-urllib3==1.25.11
-uvicorn==0.11.8
-uvloop==0.14.0; sys_platform != "win32" and sys_platform != "cygwin" and platform_python_implementation != "PyPy"
-websockets==8.1
+typing-extensions==3.7.4.3; python_version >= "3.7" and python_version < "4.0"
+ujson==3.2.0; python_version >= "3.6"
+urllib3==1.25.11; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4" and python_version >= "3.6"
+uvicorn==0.11.8; python_version >= "3.6"
+uvloop==0.14.0; sys_platform != "win32" and sys_platform != "cygwin" and platform_python_implementation != "PyPy" and python_version >= "3.6"
+websockets==8.1; python_version >= "3.6" and python_full_version >= "3.6.1"

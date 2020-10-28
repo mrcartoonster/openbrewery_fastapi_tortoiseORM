@@ -1,17 +1,19 @@
+# -*- coding: utf-8 -*-
 # project/app/main.py
-# This is where our FastAPI endpoint routers from sponsors and beers are
-# served.
+"""
+This is where our FastAPI endpoint routers from sponsors and beers are
+served.
+"""
 
 
 from fastapi import FastAPI
 
-
 app = FastAPI()
 
 
-@app.get('/ping')
+@app.get("/ping")
 def pong():
     """
     Test router for settings and quick fire up.
     """
-    return {'ping': 'pong!'}
+    return {"ping": "pong!"}
