@@ -6,14 +6,20 @@ served.
 """
 
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+
+from app.config import Settings, get_settings
 
 app = FastAPI()
 
 
 @app.get("/ping")
-def pong():
+def pong(settings: Settings = Depends(get_settings)):
     """
     Test router for settings and quick fire up.
     """
-    return {"ping": "pong!"}
+    return {
+        "ping": "pong!",
+        "environment": settings.environment,
+        "testing": settings.testing,
+    }

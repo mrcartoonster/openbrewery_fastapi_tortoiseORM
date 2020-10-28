@@ -11,6 +11,7 @@ fastapi = {extras = ["all"], version = "^0.61.1"}
 psycopg2-binary = "^2.8.6"
 tortoise-orm = "^0.16.17"
 asyncpg = "^0.21.0"
+gunicorn = "^20.0.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
@@ -29,6 +30,7 @@ prettyprinter = "^0.18.0"
 ipython = "^7.18.1"
 rich = "^9.1.0"
 pre-commit = "^2.7.1"
+python-dotenv = "^0.14.0"
 
 [tool.pytest.ini_options]
 addopts = "-rssxX -l --tb=short --strict --emoji -vvv"
