@@ -1,4 +1,5 @@
-![Beer](img/noun_Beer_23573.png)![interrogate](img/interrogate_badge.svg)
+![Beer](img/noun_Beer_23573.png)
+![interrogate](img/interrogate_badge.svg)
 
 Simple FastAPI example following Calmcode
 ----------
