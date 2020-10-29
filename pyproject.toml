@@ -31,10 +31,25 @@ ipython = "^7.18.1"
 rich = "^9.1.0"
 pre-commit = "^2.7.1"
 python-dotenv = "^0.14.0"
+interrogate = "^1.3.1"
 
 [tool.pytest.ini_options]
 addopts = "-rssxX -l --tb=short --strict --emoji -vvv"
 xfail_strict = "True"
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = true
+ignore-magic = true
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = false
+fail-under = 95
+exclude = ["setup.py", "docs", "build"]
+verbose = 1
+quiet = false
+color = true
 
 [build-system]
 requires = ["poetry>=0.12"]

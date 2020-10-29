@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# app/models/tortoise
 """
 Tortoise database models setup.
 """
@@ -50,3 +51,34 @@ class Recipes(models.Model):
     style_id = fields.SmallIntField()
     size = fields.FloatField()
     og = fields.FloatField()
+    fg = fields.FloatField()
+    abv = fields.FloatField()
+    ibu = fields.FloatField()
+    color = fields.FloatField()
+    boil_size = fields.TextField()
+    boil_time = fields.SmallIntField()
+    boil_gravity = fields.TextField(null=True)
+    efficiency = fields.SmallIntField()
+    mash_thickness = fields.TextField(null=True)
+    sugar_scale = fields.TextField()
+    brew_method = fields.TextField()
+    pitch_rate = fields.TextField(null=True)
+    primary_temp = fields.TextField(null=True)
+    priming_sugar = fields.TextField(null=True)
+    priming_amount = fields.TextField(null=True)
+    user_id = fields.SmallIntField(null=True)
+
+    class Meta:
+        """
+        Adding tablename, description, and order.
+        """
+
+        table = "recipes"
+        description = "Beer recipes table from Brewers friend beer recipes."
+        ordering = ["name"]
+
+    def __str__(self):
+        """
+        Returning name field.
+        """
+        return self.name
