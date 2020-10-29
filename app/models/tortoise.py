@@ -2,7 +2,7 @@
 """
 Tortoise database models setup.
 """
-from tortoise import models
+from tortoise import fields, models
 
 
 class Recipes(models.Model):
@@ -26,8 +26,27 @@ class Recipes(models.Model):
         color: float = Standard reference Method - light to dark
         ex. 40 = black
         boil_size: str = Fluid at beginning of boil
-        boil_time: int
+        boil_time: int = Time wort is boild
+        boil_gravity: str = Specific gravity of wort before the boil
+        efficiency: int = Beer mash extraction efficiency - extracting sugars
+        from the grain during mash
+        mash_thickness: str = Amount of water per pound of grain
+        sugar_scale: str = Scale to determine the concentration of
+        dissolved solids in wort
+        brew_method: str = various techniques for brewing
+        pitch_rate: str = Yeast added to the fermentor
+        per gravity unit - M cells/m/deg P
+        primary_temp: str = Temperature at the fermenting stage
+        priming_sugar: str = Priming sugar type used if sugar is used
+        priming_amount: str =  Amount of priming sugar used if sugar was used
+        user_id: int = ForeignKey to another table. Will be removed.
 
     """
 
-    pass
+    beer_id = fields.SmallIntField(pk=True)
+    name = fields.TextField(null=True)
+    url = fields.TextField()
+    style = fields.TextField(null=True)
+    style_id = fields.SmallIntField()
+    size = fields.FloatField()
+    og = fields.FloatField()
