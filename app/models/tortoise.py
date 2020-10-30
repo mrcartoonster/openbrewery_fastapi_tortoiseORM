@@ -4,6 +4,7 @@
 Tortoise database models setup.
 """
 from tortoise import fields, models
+from tortoise.contrib.pydantic import pydantic_model_creator
 
 
 class Recipes(models.Model):
@@ -82,3 +83,6 @@ class Recipes(models.Model):
         Returning name field.
         """
         return self.name
+
+
+RecipeSchema = pydantic_model_creator(Recipes)

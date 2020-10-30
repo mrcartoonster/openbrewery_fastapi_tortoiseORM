@@ -9,7 +9,7 @@ served.
 from fastapi import FastAPI
 from logger import logger
 
-from app.api import sponsors
+from app.api import beer
 from app.db import init_db
 
 
@@ -18,7 +18,7 @@ def create_app() -> FastAPI:
     FastAPI app factory.
     """
     app = FastAPI()
-    app.include_router(sponsors.router)
+    app.include_router(beer.router, prefix="/beer", tags=["booze"])
 
     return app
 
