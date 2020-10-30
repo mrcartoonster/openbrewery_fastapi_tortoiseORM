@@ -1,6 +1,6 @@
 ![Beer](img/noun_Beer_23573.png)
 
-![interrogate](img/interrogate_badge.svg)![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![interrogate](img/interrogate_badge.svg) ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)]
 
 Simple FastAPI example following Calmcode
 ----------
