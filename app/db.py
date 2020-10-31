@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 # app/db.py
 """
-This will hold our database models.
-
-Place holder for now. We'll fill in once we create our models.
-
+FastAPI Tortoise initialization for generating Tortoise schemas to
+initialize in `app.main.py`.
 """
 import os
 from pathlib import Path
