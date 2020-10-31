@@ -4,7 +4,6 @@
 Tortoise database models setup.
 """
 from dataclasses import dataclass
-from datetime import datetime
 
 from tortoise import fields, models
 
@@ -59,8 +58,8 @@ class Brewery(models.Model):
     postal_code: str = fields.TextField()
     website_url: str = fields.TextField(null=True)
     phone: str = fields.TextField()
-    created_at: datetime = fields.DatetimeField(null=True)
-    updated_at: datetime = fields.DatetimeField(null=True)
+    created_at: str = fields.DatetimeField(null=True)
+    updated_at: str = fields.DatetimeField(null=True)
     country: str = fields.TextField()
     longitude: float = fields.DecimalField(
         max_digits=35,
