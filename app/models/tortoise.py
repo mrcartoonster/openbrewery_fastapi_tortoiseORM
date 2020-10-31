@@ -4,6 +4,7 @@
 Tortoise database models setup.
 """
 from dataclasses import dataclass
+from datetime import datetime
 
 from tortoise import fields, models
 
@@ -46,4 +47,38 @@ class Brewery(models.Model):
 
     """
 
-    id: str = fields.TextField
+    id: str = fields.TextField()
+    name: str = fields.TextField()
+    brewery_type: str = fields.TextField()
+    street: str = fields.TextField(null=True)
+    address_2: str = fields.TextField(null=True)
+    address_3: str = fields.TextField(null=True)
+    city: str = fields.TextField()
+    state: str = fields.TextField(null=True)
+    county_province: str = fields.TextField(null=True)
+    postal_code: str = fields.TextField()
+    website_url: str = fields.TextField(null=True)
+    phone: str = fields.TextField()
+    created_at: datetime = fields.DatetimeField(null=True)
+    updated_at: datetime = fields.DatetimeField(null=True)
+    country: str = fields.TextField()
+    longitude: float = fields.DecimalField(
+        max_digits=35,
+        decimal_places=30,
+        null=True,
+    )
+    latitude: float = fields.DecimalField(
+        max_digits=35,
+        decimal_places=30,
+        null=True,
+    )
+    tags: bool = fields.BooleanField(null=True)
+    idx: int = fields.IntField(pk=True)
+
+    class Meta:
+        """
+        Table name and description.
+        """
+
+        table = "breweries"
+        table_description = "OpenBreweryDB table for Tortoise consumption."
