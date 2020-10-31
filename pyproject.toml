@@ -31,11 +31,11 @@ pretty-errors = "^1.2.18"
 prettyprinter = "^0.18.0"
 ipython = "^7.18.1"
 rich = "^9.1.0"
-pre-commit = "^2.7.1"
 python-dotenv = "^0.14.0"
 interrogate = "^1.3.1"
 logme = "^1.3.2"
 respx = "^0.14.0"
+pre-commit = "^2.8.2"
 
 [tool.pytest.ini_options]
 addopts = "-rssxX -l --tb=short --strict --emoji -vvv"
