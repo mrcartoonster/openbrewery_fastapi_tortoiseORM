@@ -4,7 +4,6 @@
 
 ### Linux ###
 *~
-.pre-commit-config.yaml
 *.yaml
 htmlcov
 .coverage
