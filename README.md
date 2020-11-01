@@ -24,6 +24,6 @@ Project Licensed under [New BSD License](LICENSE)
 ## My Socials
 ---
 
-You can catch me on Twitter at [@mrcartoonster](https://twitter.com/mrcartoonster)
-Instgram at [@pizzamachinegun](https://www.instagram.com/pizzamachinegun/)
-As well as email me at [mrcartoonster@fastmail.com](mrcartoonster@fastmail.com) for business inquiries.
+* You can catch me on Twitter at [@mrcartoonster](https://twitter.com/mrcartoonster)
+* Instgram at [@pizzamachinegun](https://www.instagram.com/pizzamachinegun/)
+* As well as email me at [mrcartoonster@fastmail.com](mrcartoonster@fastmail.com) for business inquiries.
