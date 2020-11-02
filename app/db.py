@@ -13,11 +13,9 @@ from logger import logger
 from tortoise import Tortoise, run_async
 from tortoise.contrib.fastapi import register_tortoise
 
-env_path = Path("..") / ".env"
+load_dotenv(dotenv_path=Path("..") / ".env")
 
-load_dotenv(dotenv_path=env_path)
-
-DATABASE_URL = os.getenv("DATBASE_URL")
+DATABASE_URL = os.getenv("DATBASE_TEST_URL")
 
 
 def init_db(app: FastAPI) -> None:
@@ -40,8 +38,18 @@ async def generate_schema() -> None:
     logger.info("Initializing Tortoise!")
 
     await Tortoise.init(
-        db_url=DATABASE_URL,
-        modules={"models": ["models.tortoise"]},
+        config={
+            "connections": {
+                "default": DATABASE_URL,
+            },
+            "apps": {
+                "models": {
+                    "models": ["app.models", "aerich.models"],
+                },
+            },
+        },
+        #   db_url=DATABASE_URL,
+        #   modules={"models": ["models.tortoise", "aerich.models"]},
     )
     logger.info("Generating database schema")
     await Tortoise.generate_schemas()

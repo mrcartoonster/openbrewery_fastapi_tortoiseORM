@@ -17,7 +17,7 @@ env_path = Path("..") / ".env"
 
 load_dotenv(dotenv_path=env_path)
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_TEST_URL")
 
 
 class Settings(BaseSettings):
