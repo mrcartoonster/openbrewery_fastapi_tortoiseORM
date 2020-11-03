@@ -4,18 +4,27 @@
 FastAPI Tortoise initialization for generating Tortoise schemas to
 initialize in `app.main.py`.
 """
-import os
-from pathlib import Path
-
-from dotenv import load_dotenv
+from environs import Env
 from fastapi import FastAPI
 from logger import logger
 from tortoise import Tortoise, run_async
 from tortoise.contrib.fastapi import register_tortoise
 
-load_dotenv(dotenv_path=Path("..") / ".env")
+env = Env()
 
-DATABASE_URL = os.getenv("DATBASE_TEST_URL")
+env.read_env()
+
+TORTOISE_ORM = {
+    "connections": {
+        "default": env("DATABASE_TEST_URL"),
+    },
+    "apps": {
+        "models": {
+            "models": ["models.tortoise", "aerich.models"],
+            "default_connection": "default",
+        },
+    },
+}
 
 
 def init_db(app: FastAPI) -> None:
@@ -24,8 +33,7 @@ def init_db(app: FastAPI) -> None:
     """
     register_tortoise(
         app,
-        db_url=DATABASE_URL,
-        modules={"models": ["app.models.tortoise"]},
+        config=TORTOISE_ORM,
         generate_schemas=False,
         add_exception_handlers=True,
     )
@@ -40,7 +48,7 @@ async def generate_schema() -> None:
     await Tortoise.init(
         config={
             "connections": {
-                "default": DATABASE_URL,
+                "default": env("DATABASE_TEST_URL"),
             },
             "apps": {
                 "models": {
