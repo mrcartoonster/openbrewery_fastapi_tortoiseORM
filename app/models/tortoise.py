@@ -6,6 +6,7 @@ Tortoise database models setup.
 from dataclasses import dataclass
 
 from tortoise import fields, models
+from tortoise.contrib.pydantic import pydantic_model_creator
 
 
 @dataclass
@@ -81,3 +82,6 @@ class Brewery(models.Model):
 
         table = "breweries"
         table_description = "OpenBreweryDB table for Tortoise consumption."
+
+
+BrewerySchema = pydantic_model_creator(Brewery, name="Brewery")
