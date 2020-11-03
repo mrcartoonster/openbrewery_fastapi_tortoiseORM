@@ -6,18 +6,16 @@ File that defines app's environment-specific config variables.
 
 import os
 from functools import lru_cache
-from pathlib import Path
 
-from dotenv import load_dotenv
+from environs import Env
 from pydantic import BaseSettings, PostgresDsn
 
 from .logger import logger
 
-env_path = Path("..") / ".env"
+env = Env()
+env.read_env()
 
-load_dotenv(dotenv_path=env_path)
-
-DATABASE_URL = os.getenv("DATABASE_TEST_URL")
+DEV_DB = env("DATABASE_TEST_URL")
 
 
 class Settings(BaseSettings):
@@ -27,7 +25,7 @@ class Settings(BaseSettings):
 
     environment: str = os.getenv("ENIRONMENT", "dev")
     testing: bool = os.getenv("TESTING", 0)
-    database_url: PostgresDsn = DATABASE_URL
+    database_url: PostgresDsn = DEV_DB
 
 
 @lru_cache()

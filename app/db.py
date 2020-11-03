@@ -14,9 +14,11 @@ env = Env()
 
 env.read_env()
 
+DEV_DB = env("DATABASE_TEST_URL")
+
 TORTOISE_ORM = {
     "connections": {
-        "default": env("DATABASE_TEST_URL"),
+        "default": DEV_DB,
     },
     "apps": {
         "models": {
@@ -48,7 +50,7 @@ async def generate_schema() -> None:
     await Tortoise.init(
         config={
             "connections": {
-                "default": env("DATABASE_TEST_URL"),
+                "default": DEV_DB,
             },
             "apps": {
                 "models": {

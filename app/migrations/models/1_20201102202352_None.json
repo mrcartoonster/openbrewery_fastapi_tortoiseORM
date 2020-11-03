@@ -1,5 +1,0 @@
-{
-    "upgrade": [
-        "CREATE TABLE IF NOT EXISTS \"breweries\" (\n    \"id\" TEXT NOT NULL,\n    \"name\" TEXT NOT NULL,\n    \"brewery_type\" TEXT NOT NULL,\n    \"street\" TEXT,\n    \"address_2\" TEXT,\n    \"address_3\" TEXT,\n    \"city\" TEXT NOT NULL,\n    \"state\" TEXT,\n    \"county_province\" TEXT,\n    \"postal_code\" TEXT NOT NULL,\n    \"website_url\" TEXT,\n    \"phone\" TEXT NOT NULL,\n    \"created_at\" TIMESTAMP,\n    \"updated_at\" TIMESTAMP,\n    \"country\" TEXT NOT NULL,\n    \"longitude\" DECIMAL(35,30),\n    \"latitude\" DECIMAL(35,30),\n    \"tags\" BOOL,\n    \"idx\" SERIAL NOT NULL PRIMARY KEY\n);\nCOMMENT ON TABLE \"breweries\" IS 'OpenBreweryDB table for Tortoise consumption.';\nCREATE TABLE IF NOT EXISTS \"aerich\" (\n    \"id\" SERIAL NOT NULL PRIMARY KEY,\n    \"version\" VARCHAR(255) NOT NULL,\n    \"app\" VARCHAR(20) NOT NULL,\n    \"content\" TEXT NOT NULL\n);"
-    ]
-}
