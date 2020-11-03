@@ -16,6 +16,7 @@ env.read_env()
 
 DEV_DB = env("DATABASE_TEST_URL")
 
+# Aerich migration dictionary
 TORTOISE_ORM = {
     "connections": {
         "default": DEV_DB,
@@ -58,8 +59,6 @@ async def generate_schema() -> None:
                 },
             },
         },
-        #   db_url=DATABASE_URL,
-        #   modules={"models": ["models.tortoise", "aerich.models"]},
     )
     logger.info("Generating database schema")
     await Tortoise.generate_schemas()
