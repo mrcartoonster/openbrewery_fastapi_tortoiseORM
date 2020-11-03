@@ -16,7 +16,7 @@ class Brewery(models.Model):
     The following attributes of a brewery are stored in this table:
         id: str = unique name of Brewery.
         name: str = Name of Brewery.
-        brewery_type: str = Type of brewer:
+        brewery_type: str = Types of breweries:
             - micro
             - nano
             - regional
