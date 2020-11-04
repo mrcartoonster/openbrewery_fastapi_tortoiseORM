@@ -5,14 +5,16 @@ SQL helper functions for FastAPI endpoint functions.
 """
 from typing import Optional
 
-from app.models import Brewery
+from app.models.tortoise import Brewery
 
 
 async def by_city(city: str) -> Optional[dict]:
     """
     Helper function that queries a list of breweries by city.
     """
-    city = await Brewery.get(city__icontains=city).values()
+    the_city = city.title()  # Cities must be capitalized.
+
+    city = await Brewery.filter(city__icontains=the_city).values()
 
     if city:
         return city
