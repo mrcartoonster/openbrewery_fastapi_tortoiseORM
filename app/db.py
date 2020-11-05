@@ -4,11 +4,14 @@
 FastAPI Tortoise initialization for generating Tortoise schemas to
 initialize in `app.main.py`.
 """
+import logging
+
 from environs import Env
 from fastapi import FastAPI
 from tortoise import Tortoise, run_async
 from tortoise.contrib.fastapi import register_tortoise
 
+logger = logging.getLogger(__name__)
 env = Env()
 
 env.read_env()
@@ -24,7 +27,7 @@ def init_db(app: FastAPI) -> None:
         app,
         db_url=DEV_DB,
         modules={"models": ["app.models.tortoise"]},
-        generate_schemas=False,
+        generate_schemas=True,
         add_exception_handlers=True,
     )
 
@@ -33,6 +36,7 @@ async def generate_schema() -> None:
     """
     Generating schemas for Tortoise model.
     """
+    logger.info("Initializing Tortoise!!!")
 
     await Tortoise.init(
         db_url=DEV_DB,

@@ -3,9 +3,17 @@
 """
 SQL helper functions for FastAPI endpoint functions.
 """
-from typing import Optional
+from typing import List, Optional
 
 from app.models.tortoise import Brewery
+
+
+async def breweries() -> List:
+    """
+    Return all breweries.
+    """
+    breweries = await Brewery.all().values()
+    return breweries
 
 
 async def by_city(city: str) -> Optional[dict]:

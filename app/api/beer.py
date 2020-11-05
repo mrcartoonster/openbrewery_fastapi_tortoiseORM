@@ -7,17 +7,24 @@ from typing import List
 
 from fastapi import APIRouter
 
-from app.api import crud
-from app.models.tortoise import BrewerySchema
+from app.models.tortoise import Brewery, BrewerySchema
 
 router = APIRouter()
 
 
-@router.get("/{city}/", response_model=List[BrewerySchema])
-async def by_city(city: str) -> List[BrewerySchema]:
+@router.get("/", response_model=List[BrewerySchema])
+async def brewery():
     """
-    Filter breweries by city.
+    Getting all breweries.
     """
-    city = await crud.by_city(city)
+    return await BrewerySchema.from_queryset(Brewery.all())
 
-    return city
+
+@router.get("/by_city", response_model=List[BrewerySchema])
+async def by_city(city: str):
+    """
+    Getting by city.
+    """
+    return await BrewerySchema.from_queryset(
+        Brewery.filter(city__icontains=city.title()),
+    )

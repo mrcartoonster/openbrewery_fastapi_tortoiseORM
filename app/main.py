@@ -11,6 +11,8 @@ from fastapi import FastAPI
 from app.api import beer
 from app.db import init_db
 
+from .logger import logger
+
 
 def create_app() -> FastAPI:
     """
@@ -30,6 +32,7 @@ async def start_event():
     """
     Start event handler to start tortoise.
     """
+    logger.info("Starting up Tortoise!!!")
     init_db(app)
 
 
@@ -38,4 +41,4 @@ async def shutdown_event():
     """
     Shutting down tortoise when FastAPI is stopped.
     """
-    pass
+    logger.info("Shutting down Tortoise!")
