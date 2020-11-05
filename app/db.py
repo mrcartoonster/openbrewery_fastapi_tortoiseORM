@@ -15,19 +15,6 @@ env.read_env()
 
 DEV_DB = env("DATABASE_TEST_URL")
 
-# Aerich migration dictionary
-TORTOISE_ORM = {
-    "connections": {
-        "default": DEV_DB,
-    },
-    "apps": {
-        "models": {
-            "models": ["models.tortoise", "aerich.models"],
-            "default_connection": "default",
-        },
-    },
-}
-
 
 def init_db(app: FastAPI) -> None:
     """
@@ -35,7 +22,8 @@ def init_db(app: FastAPI) -> None:
     """
     register_tortoise(
         app,
-        config=TORTOISE_ORM,
+        db_url=DEV_DB,
+        modules={"models": ["app.models.tortoise"]},
         generate_schemas=False,
         add_exception_handlers=True,
     )
@@ -47,16 +35,8 @@ async def generate_schema() -> None:
     """
 
     await Tortoise.init(
-        config={
-            "connections": {
-                "default": DEV_DB,
-            },
-            "apps": {
-                "models": {
-                    "models": ["app.models", "aerich.models"],
-                },
-            },
-        },
+        db_url=DEV_DB,
+        modules={"models": ["models.tortoise"]},
     )
     await Tortoise.generate_schemas()
     await Tortoise.close_connections()
