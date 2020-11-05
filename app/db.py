@@ -6,7 +6,6 @@ initialize in `app.main.py`.
 """
 from environs import Env
 from fastapi import FastAPI
-from logger import logger
 from tortoise import Tortoise, run_async
 from tortoise.contrib.fastapi import register_tortoise
 
@@ -46,7 +45,6 @@ async def generate_schema() -> None:
     """
     Generating schemas for Tortoise model.
     """
-    logger.info("Initializing Tortoise!")
 
     await Tortoise.init(
         config={
@@ -60,7 +58,6 @@ async def generate_schema() -> None:
             },
         },
     )
-    logger.info("Generating database schema")
     await Tortoise.generate_schemas()
     await Tortoise.close_connections()
 

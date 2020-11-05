@@ -10,8 +10,6 @@ from functools import lru_cache
 from environs import Env
 from pydantic import BaseSettings, PostgresDsn
 
-from .logger import logger
-
 env = Env()
 env.read_env()
 
@@ -33,5 +31,4 @@ def get_settings() -> BaseSettings:
     """
     Dependency injection of settings.
     """
-    logger.info("Loading config settings from the environment")
     return Settings()

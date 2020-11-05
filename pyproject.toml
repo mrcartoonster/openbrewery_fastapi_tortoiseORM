@@ -40,6 +40,8 @@ python-dotenv = {extras = ["cli"], version = "^0.15.0"}
 dump-env = "^1.2.0"
 pyperclip = "^1.8.1"
 pytest-pythonpath = "^0.7.3"
+backpack = "^0.1"
+asynctest = "^0.13.0"
 
 [tool.pytest.ini_options]
 addopts = "-rssxX -l --tb=short --strict --emoji -vvv"

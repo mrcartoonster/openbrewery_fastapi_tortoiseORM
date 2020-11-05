@@ -26,7 +26,16 @@ def get_settings_override():
     return Settings(testing=1)
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="module")
+def event_loop(client):
+    """
+    Creating event loop for asyncio.
+    """
+    yield client.task.get_loop()
+
+
+# @pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="session")
 def initialize_tests(request):
     """
     Setup and teardown for Tortoise test database connection.

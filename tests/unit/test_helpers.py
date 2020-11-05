@@ -10,6 +10,6 @@ def test_by_city():
     """
     Test by_city helper function.
     """
-    city = crud.by_city("miami")
+    city = await crud.by_city("miami")
 
-    assert "Miami" in city[:]
+    assert "Miami" in city[0]
