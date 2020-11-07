@@ -11,7 +11,7 @@ router = APIRouter()
 
 
 @router.get("/")
-def breweries():
+async def breweries():
     """
     Root call the return all breweries in the API.
     """
