@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # app/db.py
 """
-FastAPI Tortoise initialization for generating Tortoise schemas to
-initialize in `app.main.py`.
+Config for Orator ORM.
 """
 
 from environs import Env

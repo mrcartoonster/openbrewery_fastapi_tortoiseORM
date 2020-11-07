@@ -9,9 +9,6 @@ served.
 from fastapi import FastAPI
 
 from app.api import beer
-from app.db import init_db
-
-from .logger import logger
 
 
 def create_app() -> FastAPI:
@@ -19,26 +16,9 @@ def create_app() -> FastAPI:
     FastAPI app factory.
     """
     app = FastAPI()
-    app.include_router(beer.router, prefix="/beer", tags=["booze"])
+    app.include_router(beer.router, prefix="/beer", tags=["Booze"])
 
     return app
 
 
 app = create_app()
-
-
-@app.on_event("startup")
-async def start_event():
-    """
-    Start event handler to start tortoise.
-    """
-    logger.info("Starting up Tortoise!!!")
-    init_db(app)
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """
-    Shutting down tortoise when FastAPI is stopped.
-    """
-    logger.info("Shutting down Tortoise!")

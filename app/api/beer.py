@@ -3,28 +3,17 @@
 """
 This will hold our FastAPI beer endpoints.
 """
-from typing import List
-
 from fastapi import APIRouter
 
-from app.models.tortoise import Brewery, BrewerySchema
+from ..models.brewery import Brewery
 
 router = APIRouter()
 
 
-@router.get("/", response_model=List[BrewerySchema])
-async def brewery():
+@router.get("/")
+def breweries():
     """
-    Getting all breweries.
+    Root call the return all breweries in the API.
     """
-    return await BrewerySchema.from_queryset(Brewery.all())
-
-
-@router.get("/by_city", response_model=List[BrewerySchema])
-async def by_city(city: str):
-    """
-    Getting by city.
-    """
-    return await BrewerySchema.from_queryset(
-        Brewery.filter(city__icontains=city.title()),
-    )
+    brews = Brewery.all()
+    return brews.serialize()
