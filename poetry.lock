@@ -1276,6 +1276,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "simple-enum"
+version = "0.0.6"
+description = "A simpler Enum for Python 3"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "simplejson"
 version = "3.17.2"
 description = "Simple, fast, extensible JSON encoder/decoder for Python"
@@ -1514,7 +1522,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "a4272876b89a12b20989ba906388744f16986e75df42b8ca2bec9497c0b75f78"
+content-hash = "d9b3b110b25aa5786b8d7f901eb0ceff6cbd2ed2c88d0b448ca4604c1a704c3b"
 
 [metadata.files]
 aerich = [
@@ -2204,6 +2212,9 @@ rich = [
 rx = [
     {file = "Rx-1.6.1-py2.py3-none-any.whl", hash = "sha256:7357592bc7e881a95e0c2013b73326f704953301ab551fbc8133a6fadab84105"},
     {file = "Rx-1.6.1.tar.gz", hash = "sha256:13a1d8d9e252625c173dc795471e614eadfe1cf40ffc684e08b8fff0d9748c23"},
+]
+simple-enum = [
+    {file = "simple-enum-0.0.6.tar.gz", hash = "sha256:e088c788185d0d4a90892fe4b2ee7f973e4f0ae2f43e171ba128345b7c202f72"},
 ]
 simplejson = [
     {file = "simplejson-3.17.2-cp27-cp27m-macosx_10_13_x86_64.whl", hash = "sha256:2d3eab2c3fe52007d703a26f71cf649a8c771fcdd949a3ae73041ba6797cfcf8"},

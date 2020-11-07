@@ -14,6 +14,7 @@ asyncpg = "^0.21.0"
 gunicorn = "^20.0.4"
 httpx = "^0.16.1"
 orator = "^0.9.9"
+simple-enum = "^0.0.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
