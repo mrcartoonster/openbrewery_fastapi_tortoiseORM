@@ -7,7 +7,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel
 
 
 class BrewType(str, Enum):
@@ -41,7 +41,7 @@ class BrewerySchema(BaseModel):
     state: Optional[str] = None
     country_province: Optional[str] = None
     postal_code: str
-    website_url: Optional[HttpUrl] = None
+    website_url: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
     country: str

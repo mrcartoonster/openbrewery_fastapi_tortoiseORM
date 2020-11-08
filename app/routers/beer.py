@@ -22,4 +22,5 @@ async def breweries() -> BrewerySchema:
     """
     Root call the return all breweries in the API.
     """
-    return Brewery.all()
+    breweries = Brewery.all()
+    return breweries.serialize()

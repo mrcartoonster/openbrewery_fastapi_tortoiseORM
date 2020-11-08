@@ -11,5 +11,4 @@ class Brewery(Model):
     """
 
     __table__ = "breweries"
-    __hidden__ = ["id"]
     __timestamps__ = False
