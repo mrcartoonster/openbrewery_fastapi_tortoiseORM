@@ -6,15 +6,11 @@ authors = ["Evan Baird <mrcartoonster@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-qrcode = {extras = ["pil"], version = "^6.1"}
 fastapi = {extras = ["all"], version = "^0.61.1"}
 psycopg2-binary = "^2.8.6"
-tortoise-orm = "^0.16.17"
-asyncpg = "^0.21.0"
 gunicorn = "^20.0.4"
 httpx = "^0.16.1"
 orator = "^0.9.9"
-simple-enum = "^0.0.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
@@ -42,7 +38,6 @@ dump-env = "^1.2.0"
 pyperclip = "^1.8.1"
 pytest-pythonpath = "^0.7.3"
 backpack = "^0.1"
-asynctest = "^0.13.0"
 
 [tool.pytest.ini_options]
 addopts = "-rssxX -l --tb=short --strict --emoji -vvv"
