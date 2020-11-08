@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+# app/routers/schemas.py
 """
 Brewery pydantic schema model.
 """
+from datetime import datetime
 from enum import Enum
 from typing import Optional
 
@@ -40,3 +42,17 @@ class BrewerySchema(BaseModel):
     country_province: Optional[str] = None
     postal_code: str
     website_url: Optional[HttpUrl] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+    country: str
+    longitude: Optional[float] = None
+    latitude: Optional[float] = None
+    tags: Optional[bool] = None
+    idx: int
+
+    class Config:
+        """
+        Turing on ORM mode.
+        """
+
+        orm_mode = True

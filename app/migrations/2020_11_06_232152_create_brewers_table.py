@@ -18,8 +18,8 @@ class CreateBrewersTable(Migration):
             """
             Brewery Table.
             """
-            table.text("id").nullable()
-            table.text("name").nullable()
+            table.text("id")
+            table.text("name")
             table.enum(
                 "brewery_type",
                 [
@@ -33,20 +33,20 @@ class CreateBrewersTable(Migration):
                     "planning",
                     "large",
                 ],
-            ).nullable()
-            table.text("street")
-            table.text("address_2")
-            table.text("address_3")
-            table.text("city").nullable()
-            table.text("state")
-            table.text("country_province")
-            table.text("postal_code").nullable()
-            table.text("website_url")
-            table.datetime("created_at")
-            table.datetime("updated_at")
-            table.text("country").nullable()
-            table.decimal("longitude")
-            table.decimal("latitude")
+            )
+            table.text("street").nullable()
+            table.text("address_2").nullable()
+            table.text("address_3").nullable()
+            table.text("city")
+            table.text("state").nullable()
+            table.text("country_province").nullable()
+            table.text("postal_code")
+            table.text("website_url").nullable()
+            table.datetime("created_at").nullable()
+            table.datetime("updated_at").nullable()
+            table.text("country")
+            table.decimal("longitude").nullable()
+            table.decimal("latitude").nullable9
             table.boolean("tags").nullable()
             table.increments("idx")
 
