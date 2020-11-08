@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 """
-Pydantic base models.
+Initializer for migrations.
 """
