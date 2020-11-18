@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 """
-init file for this module.
+Database helper functions.
 """

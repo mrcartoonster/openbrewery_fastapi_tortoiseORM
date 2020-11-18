@@ -8,7 +8,7 @@ served.
 
 from fastapi import FastAPI
 
-from app.routers import beer
+from app.api import ping
 
 
 def create_app() -> FastAPI:
@@ -16,7 +16,7 @@ def create_app() -> FastAPI:
     FastAPI app factory.
     """
     app = FastAPI()
-    app.include_router(beer.router, prefix="/breweries", tags=["Booze"])
+    app.include_router(ping.router)
 
     return app
 

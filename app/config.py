@@ -13,7 +13,7 @@ from pydantic import BaseSettings, PostgresDsn
 env = Env()
 env.read_env()
 
-DEV_DB = env("DATABASE_TEST_URL")
+DEV_DB = env("DEV_DB")
 
 
 class Settings(BaseSettings):
