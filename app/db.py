@@ -15,8 +15,8 @@ env = Env()
 env.read_env()
 
 # Following the FastAPI in parts section of sql database ORM. This will be
-# where our database is connected and initialized. We'll be imported in the
-# main.py to actually be created
+# where our database is connected and initialized. Will be imported in the
+# app.main.py to actually be created
 metadata = sqlalchemy.MetaData()
 database = databases.Database(env("DEV_DB"))
 
