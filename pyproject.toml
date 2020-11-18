@@ -7,10 +7,8 @@ authors = ["Evan Baird <mrcartoonster@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 fastapi = {extras = ["all"], version = "^0.61.1"}
-psycopg2-binary = "^2.8.6"
 gunicorn = "^20.0.4"
 httpx = "^0.16.1"
-orator = "^0.9.9"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
