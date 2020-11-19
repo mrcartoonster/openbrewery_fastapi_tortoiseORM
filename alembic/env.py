@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
 from logging.config import fileConfig
 
-from alembic import context
+from environs import Env
 from sqlalchemy import engine_from_config, pool
+
+from alembic import context
+from app.db import metadata
+
+env = Env()
+env.read_env()
+
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 
+section = config.config_ini_section
+config.set_section_option(section, "DB_USER", env("DB_USER"))
+config.set_section_option(section, "DB_PASS", env("DB_PASS"))
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
@@ -16,7 +26,7 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -37,7 +47,7 @@ def run_migrations_offline():
     script output.
 
     """
-    url = config.get_main_option("sqlalchemy.url")
+    url = config.get_main_option("sqlalchemy.url", env("DEV_DB"))
     context.configure(
         url=url,
         target_metadata=target_metadata,
