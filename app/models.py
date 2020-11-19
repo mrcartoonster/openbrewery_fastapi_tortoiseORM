@@ -9,7 +9,11 @@ from app.db import MainMeta
 
 class Brewery(ormar.Model):
     """
-    Brewery Table.
+    Class that represents a Brewery within the United States.
+
+    Fhte following attributes of a brewery are stored in this table:
+        id:
+
     """
 
     class Meta(MainMeta):

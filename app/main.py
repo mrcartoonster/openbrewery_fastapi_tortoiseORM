@@ -4,12 +4,12 @@
 This is where our FastAPI endpoint routers from sponsors and beers are
 served.
 """
-
-
 from fastapi import FastAPI
 
 from app.api import ping
 from app.db import database
+
+from .desc import desc
 
 
 def create_app() -> FastAPI:
@@ -18,13 +18,17 @@ def create_app() -> FastAPI:
     """
 
     # FastAPI instance
-    app = FastAPI()
+    app = FastAPI(
+        title="OpenBrewery",
+        description=desc,
+        version="0.0.1",
+    )
 
     # ormar database instance from db.py
     app.state.database = database
 
     # API endpoints
-    app.include_router(ping.router)
+    app.include_router(ping.router)  # Test endpoint.
 
     return app
 
