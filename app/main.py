@@ -22,6 +22,7 @@ def create_app() -> FastAPI:
         title="OpenBrewery",
         description=desc,
         version="0.0.1",
+        redoc_url="/",
     )
 
     # ormar database instance from db.py
