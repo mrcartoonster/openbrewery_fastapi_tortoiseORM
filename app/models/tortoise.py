@@ -70,4 +70,15 @@ class Brewery(Model):
     created_at = fields.DateTimeField(null=True)
     updated_at = fields.DateTimeField(null=True)
     country = fields.TextField()
-    longitude = fields
+    longitude = fields.DecimalField(max_digits=12, decimal_places=8)
+    latitude = fields.DecimalField(max_digits=12, decimal_places=8)
+
+    class Meta:
+        """
+        Table information for Brewery Model.
+        """
+
+        table = "breweries"
+        description = """
+        Model based on OpenBreweryDB
+        """
