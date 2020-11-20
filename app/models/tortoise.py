@@ -2,10 +2,32 @@
 """
 Brewery Tortoise ORM Model.
 """
+from dataclasses import dataclass
+from datetime import datetime
+from enum import Enum
+
 from tortoise import fields
 from tortoise.models import Model
 
 
+class Brews(str, Enum):
+    """
+    Enum class for brewery_type attribute.
+    """
+
+    micro = "micro"
+    nano = "nano"
+    regional = "regional"
+    brewpub = "brewpub"
+    large = "large"
+    planning = "planning"
+    bar = "bar"
+    contract = "contract"
+    proprietor = "proprietor"
+    closed = "closed"
+
+
+@dataclass
 class Brewery(Model):
     """
     This class represents the breweries tables.
@@ -53,25 +75,26 @@ class Brewery(Model):
 
     """
 
-    id = fields.IntField(pk=True)
-    name = fields.TextField()
-    brewery_type = fields.CharEnumField(
-        enum_type=str,
+    id: int = fields.IntField(pk=True)
+    name: str = fields.TextField()
+    brewery_type: str = fields.CharEnumField(
+        enum_type=Brews,
+        max_length=12,
         description="List of brewery types within table.",
     )
-    street = fields.TextField(null=True)
-    address_2 = fields.TextField(null=True)
-    address_3 = fields.TextField(null=True)
-    city = fields.TextField()
-    state = fields.TextField(null=True)
-    postal_code = fields.TextField()
-    website_url = fields.TextField(null=True)
-    phone = fields.TextField(null=True)
-    created_at = fields.DateTimeField(null=True)
-    updated_at = fields.DateTimeField(null=True)
-    country = fields.TextField()
-    longitude = fields.DecimalField(max_digits=12, decimal_places=8)
-    latitude = fields.DecimalField(max_digits=12, decimal_places=8)
+    street: str = fields.TextField(null=True)
+    address_2: str = fields.TextField(null=True)
+    address_3: str = fields.TextField(null=True)
+    city: str = fields.TextField()
+    state: str = fields.TextField(null=True)
+    postal_code: str = fields.TextField()
+    website_url: str = fields.TextField(null=True)
+    phone: str = fields.TextField(null=True)
+    created_at: datetime = fields.DatetimeField(null=True)
+    updated_at: datetime = fields.DatetimeField(null=True)
+    country: str = fields.TextField()
+    longitude: float = fields.DecimalField(max_digits=12, decimal_places=8)
+    latitude: float = fields.DecimalField(max_digits=12, decimal_places=8)
 
     class Meta:
         """
