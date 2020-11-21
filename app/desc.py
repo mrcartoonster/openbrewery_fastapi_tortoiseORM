@@ -8,7 +8,7 @@ desc = """
 ---
 
 FastAPI clone of [OpenBreweeryDB](https://www.openbrewerydb.org/). Using
-[Ormar](https://collerek.github.io/ormar/) as the database backend.
+[TortoiseORM](https://tortoise-orm.readthedocs.io/en/latest/index.html#) as the database backend.
 
 If you find any benefit please sponsor me on GitHub
 

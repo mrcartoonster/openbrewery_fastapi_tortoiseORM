@@ -4,24 +4,40 @@ This the breweries endpoint.
 """
 from typing import List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPExcepiton
 
-from app.models.tortoise import Brewery, BrewerySchema
+from app import crud
+from app.models.tortoise import BrewerySchema
 
 router = APIRouter()
 
 
-@router.get("/{city}", response_model=List[BrewerySchema])
+@router.get(
+    "/{city}",
+    response_model=List[BrewerySchema],
+    response_model_exclude_none=True,
+)
 async def by_city(city: str):
     """
     Filter breweries by city.
     """
-    c = await Brewery.filter(city=city.title())
-    return c
+    the_city = await crud.get_city(city)
+
+    if not the_city:
+        raise HTTPExcepiton(
+            statu_code=404,
+            detail=f"{city.title()} is not a city in the United States.",
+        )
+    else:
+        return the_city
 
 
-@router.get("/{type}", response_model=List[BrewerySchema])
-async def by_type(type: str):
+@router.get(
+    "/{type}",
+    response_model=List[BrewerySchema],
+    response_model_exclude_none=True,
+)
+async def by_type(btype: str):
     """
     Filter by type of brewery.
 
@@ -44,5 +60,4 @@ async def by_type(type: str):
     * `closed` - A location which has been closed.
 
     """
-    t = await Brewery.filter(by_type=type.title())
-    return t
+    pass
