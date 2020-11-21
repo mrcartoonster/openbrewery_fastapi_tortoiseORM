@@ -2,8 +2,6 @@
 """
 Brewery Tortoise ORM Model.
 """
-from dataclasses import dataclass
-from datetime import datetime
 from enum import Enum
 
 from tortoise import fields
@@ -28,7 +26,6 @@ class Brews(str, Enum):
     closed = "closed"
 
 
-@dataclass
 class Brewery(Model):
     """
     This class represents the breweries tables.
@@ -76,26 +73,34 @@ class Brewery(Model):
 
     """
 
-    id: int = fields.IntField(pk=True)
-    name: str = fields.TextField()
-    brewery_type: Brews = fields.CharEnumField(
+    id = fields.IntField(pk=True)
+    name = fields.TextField()
+    brewery_type = fields.CharEnumField(
         enum_type=Brews,
         description="Enumator for brewery types.",
         max_length=12,
     )
-    street: str = fields.TextField(null=True)
-    address_2: str = fields.TextField(null=True)
-    address_3: str = fields.TextField(null=True)
-    city: str = fields.TextField()
-    state: str = fields.TextField(null=True)
-    postal_code: str = fields.TextField()
-    website_url: str = fields.TextField(null=True)
-    phone: str = fields.TextField(null=True)
-    created_at: datetime = fields.DatetimeField(null=True)
-    updated_at: datetime = fields.DatetimeField(null=True)
-    country: str = fields.TextField()
-    longitude: float = fields.DecimalField(max_digits=12, decimal_places=8)
-    latitude: float = fields.DecimalField(max_digits=12, decimal_places=8)
+    street = fields.TextField(null=True)
+    address_2 = fields.TextField(null=True)
+    address_3 = fields.TextField(null=True)
+    city = fields.TextField()
+    state = fields.TextField(null=True)
+    postal_code = fields.TextField()
+    website_url = fields.TextField(null=True)
+    phone = fields.TextField(null=True)
+    created_at = fields.DatetimeField(null=True)
+    updated_at = fields.DatetimeField(null=True)
+    country = fields.TextField()
+    longitude = fields.DecimalField(
+        max_digits=12,
+        decimal_places=8,
+        null=True,
+    )
+    latitude = fields.DecimalField(
+        max_digits=12,
+        decimal_places=8,
+        null=True,
+    )
 
     class Meta:
         """
@@ -108,4 +113,4 @@ class Brewery(Model):
         """
 
 
-BrewerySchema = pydantic_model_creator(Brewery)
+BrewerySchema = pydantic_model_creator(Brewery, name="Brewery")

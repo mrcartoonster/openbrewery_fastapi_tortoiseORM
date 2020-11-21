@@ -102,7 +102,7 @@ python-versions = "*"
 name = "backpack"
 version = "0.1"
 description = "Useful utilities for Python."
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -1101,7 +1101,7 @@ python-versions = "*"
 name = "simplejson"
 version = "3.17.2"
 description = "Simple, fast, extensible JSON encoder/decoder for Python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.5, !=3.0.*, !=3.1.*, !=3.2.*"
 
@@ -1319,7 +1319,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "1c01dc4f8cf2e0f2cdb24a105a32d86224b1d0bddeb2bd6d0ac9c391f9b73915"
+content-hash = "d49b4e4d136f9ef05cb5add216cfda35380bd0a8787d84cbb44b00f13d59b967"
 
 [metadata.files]
 aiofiles = [
