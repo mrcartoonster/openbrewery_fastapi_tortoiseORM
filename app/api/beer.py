@@ -4,10 +4,10 @@ This the breweries endpoint.
 """
 from typing import List
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 
 from app import crud
-from app.models.tortoise import BrewerySchema
+from app.models.tortoise import BrewerySchema, BrewsEnum
 
 router = APIRouter()
 
@@ -17,7 +17,21 @@ router = APIRouter()
     response_model=List[BrewerySchema],
     response_model_exclude_none=True,
 )
-async def by_city(city: str, per_page: int = 50, page: int = 0):
+async def by_city(
+    city: str = Query(
+        ...,
+        title="US city to look for breweries in.",
+    ),
+    per_page: int = Query(
+        20,
+        title="Number of breweries per page.",
+        le=50,
+    ),
+    page: int = Query(
+        0,
+        title="Page number",
+    ),
+):
     """
     Filter breweries by city.
     """
@@ -37,7 +51,21 @@ async def by_city(city: str, per_page: int = 50, page: int = 0):
     response_model=List[BrewerySchema],
     response_model_exclude_none=True,
 )
-async def by_type(brew_type: str, per_page: int = 50, page: int = 0):
+async def by_type(
+    brew_type: str = Query(
+        ...,
+        title="Brewery Type",
+    ),
+    per_page: int = Query(
+        20,
+        title="Number of breweries per page",
+        le=50,
+    ),
+    page: int = Query(
+        0,
+        title="Page number",
+    ),
+):
     """
     Filter by type of brewery.
 
@@ -60,11 +88,23 @@ async def by_type(brew_type: str, per_page: int = 50, page: int = 0):
     * `closed` - A location which has been closed.
 
     """
+    if brew_type not in list(BrewsEnum):
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"{brew_type} is not a brewery type contained."
+                " Please refer to the docs to view valid brewery types."
+            ),
+        )
     the_type = await crud.get_type(brew_type, per_page, page)
 
     if not the_type:
         raise HTTPException(
             status_code=404,
-            detail=f"{brew_type} is not a type in the list.",
+            detail=(
+                f"Unfortunately, {brew_type} doesn't have any listings"
+                " at this time."
+            ),
         )
+
     return the_type
