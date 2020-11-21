@@ -17,11 +17,11 @@ router = APIRouter()
     response_model=List[BrewerySchema],
     response_model_exclude_none=True,
 )
-async def by_city(city: str):
+async def by_city(city: str, per_page: int = 50, page: int = 0):
     """
     Filter breweries by city.
     """
-    the_city = await crud.get_city(city)
+    the_city = await crud.get_city(city, per_page, page)
 
     if not the_city:
         raise HTTPException(
@@ -37,7 +37,7 @@ async def by_city(city: str):
     response_model=List[BrewerySchema],
     response_model_exclude_none=True,
 )
-async def by_type(brew_type: str):
+async def by_type(brew_type: str, per_page: int = 50, page: int = 0):
     """
     Filter by type of brewery.
 
@@ -60,7 +60,7 @@ async def by_type(brew_type: str):
     * `closed` - A location which has been closed.
 
     """
-    the_type = await crud.get_type(brew_type)
+    the_type = await crud.get_type(brew_type, per_page, page)
 
     if not the_type:
         raise HTTPException(
