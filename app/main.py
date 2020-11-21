@@ -6,8 +6,8 @@ served.
 """
 from fastapi import FastAPI
 
-from app.api import ping
-from app.db import database
+from app.api import beer, ping
+from app.db import init_db
 
 from .desc import desc
 
@@ -25,11 +25,9 @@ def create_app() -> FastAPI:
         redoc_url="/",
     )
 
-    # ormar database instance from db.py
-    app.state.database = database
-
     # API endpoints
     app.include_router(ping.router)  # Test endpoint.
+    app.include_router(beer.router, prefix="/breweries", tags=["beer"])
 
     return app
 
@@ -38,20 +36,16 @@ app = create_app()
 
 
 @app.on_event("startup")
-async def startup() -> None:
+async def startup():
     """
-    Startup ormar async database for FastAPI app.
+    Starting up tortoise for FastAPI.
     """
-    database_ = app.state.database
-    if not database_.is_connected:
-        await database_.connect()
+    init_db(app)
 
 
 @app.on_event("shutdown")
-async def shutdown() -> None:
+async def shutdown():
     """
-    Clean shutdown of async db so eventloop is torn down cleanly.
+    Proper shutdown of Tortoise and Event loop.
     """
-    database_ = app.state.database
-    if database_.is_connected:
-        await database_.disconnect()
+    ...
