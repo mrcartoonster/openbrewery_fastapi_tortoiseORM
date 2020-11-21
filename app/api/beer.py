@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This the breweries endpoint.
+Location of breweries endpoints.
 """
 from typing import List
 
@@ -107,4 +107,5 @@ async def by_type(
             ),
         )
 
-    return the_type
+    else:
+        return the_type
