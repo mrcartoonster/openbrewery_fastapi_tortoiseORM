@@ -7,6 +7,7 @@ from datetime import datetime
 from enum import Enum
 
 from tortoise import fields
+from tortoise.contrib.pydantic import pydantic_model_creator
 from tortoise.models import Model
 
 
@@ -77,10 +78,10 @@ class Brewery(Model):
 
     id: int = fields.IntField(pk=True)
     name: str = fields.TextField()
-    brewery_type: str = fields.CharEnumField(
+    brewery_type: Brews = fields.CharEnumField(
         enum_type=Brews,
+        description="Enumator for brewery types.",
         max_length=12,
-        description="List of brewery types within table.",
     )
     street: str = fields.TextField(null=True)
     address_2: str = fields.TextField(null=True)
@@ -105,3 +106,6 @@ class Brewery(Model):
         description = """
         Model based on OpenBreweryDB
         """
+
+
+BrewerySchema = pydantic_model_creator(Brewery)
