@@ -23,7 +23,7 @@ async def get_type(brew_type: str) -> Optional[dict]:
     """
     Helper function for the app.beer.by_type endpoint.
     """
-    the_type = await Brewery.filter(brewery_type=brew_type)
+    the_type = await Brewery.filter(brewery_type=brew_type.lower())
 
     if the_type:
         return the_type

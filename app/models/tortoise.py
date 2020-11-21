@@ -2,28 +2,9 @@
 """
 Brewery Tortoise ORM Model.
 """
-from enum import Enum
-
 from tortoise import fields
 from tortoise.contrib.pydantic import pydantic_model_creator
 from tortoise.models import Model
-
-
-class Brews(str, Enum):
-    """
-    Enum class for brewery_type attribute.
-    """
-
-    micro = "micro"
-    nano = "nano"
-    regional = "regional"
-    brewpub = "brewpub"
-    large = "large"
-    planning = "planning"
-    bar = "bar"
-    contract = "contract"
-    proprietor = "proprietor"
-    closed = "closed"
 
 
 class Brewery(Model):
@@ -75,11 +56,7 @@ class Brewery(Model):
 
     id = fields.IntField(pk=True)
     name = fields.TextField()
-    brewery_type = fields.CharEnumField(
-        enum_type=Brews,
-        description="Enumator for brewery types.",
-        max_length=12,
-    )
+    brewery_type = fields.TextField()
     street = fields.TextField(null=True)
     address_2 = fields.TextField(null=True)
     address_3 = fields.TextField(null=True)
