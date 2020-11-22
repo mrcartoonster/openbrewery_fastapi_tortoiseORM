@@ -31,7 +31,7 @@ async def by_city(
         0,
         title="Page number",
     ),
-):
+) -> List[BrewerySchema]:
     """
     Filter breweries by city.
     """
@@ -47,7 +47,7 @@ async def by_city(
 
 
 @router.get(
-    "/brewery_type",
+    "/by_type",
     response_model=List[BrewerySchema],
     response_model_exclude_none=True,
 )
@@ -65,7 +65,7 @@ async def by_type(
         0,
         title="Page number",
     ),
-):
+) -> List[BrewerySchema]:
     """
     Filter by type of brewery.
 

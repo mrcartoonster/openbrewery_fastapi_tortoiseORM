@@ -40,7 +40,7 @@ backpack = "^0.1"
 pytest-asyncio = "^0.14.0"
 
 [tool.pytest.ini_options]
-addopts = "-rssxX -l --tb=short --strict --emoji -vvv"
+addopts = "-rssxX -l --tb=short --strict --emoji -vvv -p no:warnings"
 xfail_strict = "True"
 
 [tool.interrogate]
