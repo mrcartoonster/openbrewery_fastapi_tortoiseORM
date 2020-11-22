@@ -7,35 +7,38 @@ from typing import Optional
 from app.models.tortoise import Brewery
 
 
-async def get_city(
-    city: str, per_page: int = 50, page: int = 0
+async def brewery(
+    by_city: Optional[str] = None,
+    by_type: Optional[str] = None,
+    per_page: int = 20,
+    page: int = 0,
 ) -> Optional[dict]:
     """
-    Helper function for the app.beer.by_city endpoint.
+    Helper function for the app.beer.breweries endpoint.
     """
-    the_city = (
-        await Brewery.filter(city=city.title()).limit(per_page).offset(page)
-    )
-
-    if the_city:
-        return the_city
+    if any((by_city, by_type)):
+        brews = Brewery.filter(city=by_city, brewery_type=by_type)
+        if brews:
+            return brews
+        else:
+            return None
     else:
-        return None
+        return Brewery.all().limit(per_page).offset(page)
 
 
-async def get_type(
-    brew_type: str, per_page: int = 50, page: int = 0
-) -> Optional[dict]:
-    """
-    Helper function for the app.beer.by_type endpoint.
-    """
-    the_type = (
-        await Brewery.filter(brewery_type=brew_type.lower())
-        .limit(50)
-        .offset(page)
-    )
+#   async def get_type(
+#       brew_type: str, per_page: int = 50, page: int = 0
+#   ) -> Optional[dict]:
+#       """
+#       Helper function for the app.beer.by_type endpoint.
+#       """
+#       the_type = (
+#           await Brewery.filter(brewery_type=brew_type.lower())
+#           .limit(50)
+#           .offset(page)
+#       )
 
-    if the_type:
-        return the_type
-    else:
-        return None
+#       if the_type:
+#           return the_type
+#       else:
+#           return None
