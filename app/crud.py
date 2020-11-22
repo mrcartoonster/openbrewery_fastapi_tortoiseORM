@@ -16,14 +16,14 @@ async def brewery(
     """
     Helper function for the app.beer.breweries endpoint.
     """
-    if any((by_city, by_type)):
-        brews = Brewery.filter(city=by_city, brewery_type=by_type)
-        if brews:
-            return brews
-        else:
-            return None
-    else:
-        return Brewery.all().limit(per_page).offset(page)
+    return (
+        Brewery.filter(
+            city=by_city,
+            brewery_type=by_type,
+        )
+        .limit(per_page)
+        .offset(page)
+    )
 
 
 #   async def get_type(
