@@ -42,6 +42,7 @@ async def by_city(
             status_code=404,
             detail=f"{city.title()} is not a city in the United States.",
         )
+
     else:
         return the_city
 
@@ -96,6 +97,7 @@ async def by_type(
                 " Please refer to the docs to view valid brewery types."
             ),
         )
+
     the_type = await crud.get_type(brew_type, per_page, page)
 
     if not the_type:
