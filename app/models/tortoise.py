@@ -84,7 +84,7 @@ class Brewery(Model):
     street: Optional[str] = fields.TextField(null=True)
     address_2: Optional[str] = fields.TextField(null=True)
     address_3: Optional[str] = fields.TextField(null=True)
-    city = fields.TextField()
+    city: Optional[str] = fields.TextField()
     state: Optional[str] = fields.TextField(null=True)
     postal_code: str = fields.TextField()
     website_url: Optional[str] = fields.TextField(null=True)
