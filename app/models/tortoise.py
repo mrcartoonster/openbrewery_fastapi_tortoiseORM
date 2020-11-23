@@ -4,7 +4,7 @@ Brewery Tortoise ORM Model.
 """
 from dataclasses import dataclass
 from datetime import datetime
-from enum import Enum
+from enum import Enum, unique
 from typing import Optional
 
 from tortoise import fields
@@ -13,6 +13,7 @@ from tortoise.models import Model
 
 
 # Make Enum class again per: https://bit.ly/36VLXUz
+@unique
 class BrewsEnum(str, Enum):
     """
     Enum for Brewery.
