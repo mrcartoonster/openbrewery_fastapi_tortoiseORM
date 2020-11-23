@@ -39,6 +39,7 @@ pyperclip = "^1.8.1"
 pytest-pythonpath = "^0.7.3"
 backpack = "^0.1"
 pytest-asyncio = "^0.14.0"
+jupyterlab = "^2.2.9"
 
 [tool.pytest.ini_options]
 addopts = "-rssxX -l --tb=short --strict --emoji -vvv -p no:warnings"

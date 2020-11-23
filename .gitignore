@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,vim,linux,macos
 
 ### Linux ###
+OpenBreweryDB
 *~
 *.yaml
 htmlcov
