@@ -19,7 +19,7 @@ If you find any benefit please sponsor me on GitHub
 brew_type = """
 Filter by type of brewery.
 
-Must be on of:
+Must be one of:
 * `micro` - Most craft breweries. For example, Samual Adams is still considered a micro brewery.
 * `nano` - An extremely small brewery which typically only distributes locally.
 * `regional` - A regional location of an expanded brewery. Ex. Sierra Nevada's Asheville, NC location.

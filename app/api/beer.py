@@ -6,9 +6,9 @@ from typing import List, Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
-from app import crud
+# from app import crud
 from app.desc import brew_type
-from app.models.tortoise import BrewerySchema, BrewsEnum
+from app.models.tortoise import Brewery, BrewerySchema, BrewsEnum
 
 router = APIRouter()
 
@@ -29,37 +29,90 @@ async def breweries(
     ),
     per_page: int = Query(
         20,
-        title="Number of breweries per page.",
+        description="Number of breweries per page.",
         le=50,
     ),
     page: int = Query(
         0,
-        title="Page number",
+        description="Page number",
     ),
 ) -> List[BrewerySchema]:
     """
     Returns a list of breweries.
     """
-    if brew_type:
-        if brew_type not in list(BrewsEnum):
-            raise HTTPException(
-                status_code=400,
-                detail=(
-                    f"{brew_type} is not a brewery type contained."
-                    " Please refer to the docs to view valid brewery types."
-                ),
-            )
 
-    brews = await crud.get_city(by_city, per_page, page)
+    # TODO Refactor and make this DRY
+    if any((by_city, by_type)):
 
-    if not brews:
-        raise HTTPException(
-            status_code=404,
-            detail=f"{by_city.title()} is not a city in the United States.",
-        )
+        beer = Brewery
+
+        if by_city:
+            if beer is None:
+                beer = (
+                    Brewery(
+                        city=by_city.title(),
+                    )
+                    .limit(per_page)
+                    .offset(per_page + page)
+                )
+
+            else:
+                beer.filter(city=by_city.title()).limit(per_page).offset(
+                    per_page + page,
+                )
+
+        if by_type:
+
+            if brew_type not in list(BrewsEnum):
+
+                raise HTTPException(
+                    status_code=400,
+                    detail=(
+                        f"{brew_type} is not a brewery type contained."
+                        " Please refer to the docs to view valid "
+                        "brewery types."
+                    ),
+                )
+
+            if beer is None:
+                beer = (
+                    Brewery(
+                        brewery_type=by_type,
+                    )
+                    .limit(per_page)
+                    .offset(per_page + page)
+                )
+
+            else:
+                beer.filter(brewerey_type=by_type).limit(per_page).offset(
+                    per_page + page,
+                )
+        return await beer
 
     else:
-        return brews
+        return await Brewery.all().limit(per_page).offset(per_page + page)
+
+
+#   if brew_type:
+#       if brew_type not in list(BrewsEnum):
+#           raise HTTPException(
+#               status_code=400,
+#               detail=(
+#                   f"{brew_type} is not a brewery type contained."
+#                   " Please refer to the docs to view valid brewery types."
+#               ),
+#           )
+
+#   brews = await crud.get_city(by_city, per_page, page)
+
+#   if not brews:
+#       raise HTTPException(
+#           status_code=404,
+#           detail=f"{by_city.title()} is not a city in the United States.",
+#       )
+
+#   else:
+#       return brews
 
 
 #   @router.get(
