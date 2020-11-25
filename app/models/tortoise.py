@@ -14,7 +14,7 @@ from tortoise.models import Model
 
 # Make Enum class again per: https://bit.ly/36VLXUz
 @unique
-class BrewsEnum(str, Enum):
+class BrewEnum(str, Enum):
     """
     Enum for Brewery.
     """
@@ -81,7 +81,7 @@ class Brewery(Model):
 
     id: int = fields.IntField(pk=True)
     name: str = fields.TextField()
-    brewery_type: BrewsEnum = fields.CharEnumField(BrewsEnum)
+    brewery_type: BrewEnum = fields.CharEnumField(BrewEnum)
     street: Optional[str] = fields.TextField(null=True)
     address_2: Optional[str] = fields.TextField(null=True)
     address_3: Optional[str] = fields.TextField(null=True)

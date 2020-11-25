@@ -5,10 +5,11 @@ Location of breweries endpoints.
 from typing import List, Optional
 
 from fastapi import APIRouter, HTTPException, Query
+from tortoise.queryset import QuerySet
 
 # from app import crud
 from app.desc import brew_type
-from app.models.tortoise import Brewery, BrewerySchema, BrewsEnum
+from app.models.tortoise import BrewEnum, Brewery, BrewerySchema
 
 router = APIRouter()
 
@@ -32,47 +33,44 @@ async def breweries(
         description="Number of breweries per page.",
         le=50,
     ),
-    page: int = Query(
-        0,
-        description="Page number",
-    ),
 ) -> List[BrewerySchema]:
     """
     Returns a list of breweries.
     """
 
-    # TODO Refactor and make this DRY
+    # TODO Refactor to make this DRY
     beer = Brewery
+    booze = ""
 
     if by_city:
 
-        booze = (
-            beer.filter(city=by_city.title())
-            .limit(per_page)
-            .offset(per_page + page)
-        )
+        if isinstance(booze, QuerySet) is False:
+            booze = beer.filter(
+                city=by_city.title(),
+            ).limit(per_page)
+
+        elif booze.exists():
+            booze = booze.filter(city=by_city.title())
+
+        else:
+            booze = booze.filter(city=by_city.title()).limit(per_page)
 
     if by_type:
 
-        if by_type not in list(BrewsEnum):
+        if by_type not in list(BrewEnum):
 
             raise HTTPException(
-                status_code=400,
-                detail=(
-                    f"{brew_type} is not a brewery type contained."
-                    " Please refer to the docs to view valid "
-                    "brewery types."
-                ),
+                status_code=422,
+                detail=f"{by_type} is not a brewery type.",
             )
 
-        booze = (
-            beer.filter(brewery_type=by_type)
-            .limit(
-                per_page,
-            )
-            .offset(
-                per_page + page,
-            )
-        )
+        if isinstance(booze, QuerySet) is False:
+            booze = beer.filter(brewery_type=by_type).limit(per_page)
+
+        elif booze.exists():
+            booze = booze.filter(brewery_type=by_type)
+
+        else:
+            booze = booze.filter(brewery_type=by_type).limit(per_page)
 
     return await booze
