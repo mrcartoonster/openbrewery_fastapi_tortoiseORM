@@ -46,6 +46,15 @@ async def breweries(
 
         if by_city:
 
+            if by_city.title() not in await beer.all().distinct().values_list(
+                "city",
+                flat=True,
+            ):
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"{by_city} is not a city in this dataset.",
+                )
+
             if isinstance(booze, QuerySet) is False:
                 booze = beer.filter(
                     city=by_city.title(),
