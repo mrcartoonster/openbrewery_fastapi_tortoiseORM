@@ -42,35 +42,39 @@ async def breweries(
     beer = Brewery
     booze = ""
 
-    if by_city:
+    if any((by_city, by_type)):
 
-        if isinstance(booze, QuerySet) is False:
-            booze = beer.filter(
-                city=by_city.title(),
-            ).limit(per_page)
+        if by_city:
 
-        elif booze.exists():
-            booze = booze.filter(city=by_city.title())
+            if isinstance(booze, QuerySet) is False:
+                booze = beer.filter(
+                    city=by_city.title(),
+                ).limit(per_page)
 
-        else:
-            booze = booze.filter(city=by_city.title()).limit(per_page)
+            elif booze.exists():
+                booze = booze.filter(city=by_city.title())
 
-    if by_type:
+            else:
+                booze = booze.filter(city=by_city.title()).limit(per_page)
 
-        if by_type not in list(BrewEnum):
+        if by_type:
 
-            raise HTTPException(
-                status_code=422,
-                detail=f"{by_type} is not a brewery type.",
-            )
+            if by_type not in list(BrewEnum):
 
-        if isinstance(booze, QuerySet) is False:
-            booze = beer.filter(brewery_type=by_type).limit(per_page)
+                raise HTTPException(
+                    status_code=422,
+                    detail=f"{by_type} is not a brewery type.",
+                )
 
-        elif booze.exists():
-            booze = booze.filter(brewery_type=by_type)
+            if isinstance(booze, QuerySet) is False:
+                booze = beer.filter(brewery_type=by_type).limit(per_page)
 
-        else:
-            booze = booze.filter(brewery_type=by_type).limit(per_page)
+            elif booze.exists():
+                booze = booze.filter(brewery_type=by_type)
 
-    return await booze
+            else:
+                booze = booze.filter(brewery_type=by_type).limit(per_page)
+
+        return await booze
+    else:
+        return await beer.all().limit(20)
