@@ -52,7 +52,7 @@ def test_by_city_failing(client_db):
     assert r_json["detail"] == "mia is not a city in this dataset."
 
 
-def test_by_type_passing(client_db):
+def test_by_type_passing(client_db, brewenums):
     """
     Ensure successful request when passing correct brewery type.
     """
@@ -60,12 +60,52 @@ def test_by_type_passing(client_db):
     # GIVEN FastAPI GET request to breweries/ endpoint
 
     # WHEN GET response to valid brewery type `by_type` query parameter
-    response = client.get("/breweries", params={"by_type": "micro"})
+    response = client.get("/breweries", params={"by_type": brewenums})
 
     # THEN assert 200 for SUCESS
     assert response.status_code == 200
 
     r_json = response.json()
 
-    # THEN assert brewery type in response
-    r_json[0]["brewery_type"] == "micro"
+    # THEN assert correct brewery type in response
+    for _ in r_json[:-1]:
+        assert _["brewery_type"] == brewenums
+
+
+def test_by_type_failing(client_db):
+    """
+    Ensure that when incorrect brewery type is requested, correct error
+    response returned.
+    """
+    # GIVEN FastAPI GET request to breweries endpoint
+
+    # WHEN GET response to invalid brewery type `by_type` query parameter
+    response = client.get("/breweries", params={"by_type": "something"})
+
+    # THEN assert HTTPException returned
+    assert response.status_code == 422
+
+    r_json = response.json()
+
+    # THEN assert correct error detail is returned
+    assert r_json["detail"] == "something is not a brewery type."
+
+
+def test_by_type_and_by_city_passing(client_db):
+    """
+    Ensure when query parameters `by_type` and `by_city` is requeseted a
+    valid city and brewery type.
+
+    It returns a successful response
+
+    """
+    # GIVEN FastAPI GET request to breweries endpoint
+
+    # WHEN GET response to `by_city` and `by_type` query parameters
+    response = client.get(
+        "/breweries",
+        params={"by_type": "micro", "by_city": "miami"},
+    )
+
+    # THEN assert successful response 200
+    assert response.status_code == 200

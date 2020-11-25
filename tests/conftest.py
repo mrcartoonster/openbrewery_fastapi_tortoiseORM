@@ -3,19 +3,24 @@
 """
 Pytest fixtures and dummy data.
 """
-# import secrets
+import secrets
+
 import pytest
 from environs import Env
 from fastapi.testclient import TestClient
 from tortoise.contrib.fastapi import register_tortoise
 
 from app.config import Settings, get_settings
-
-# from app.models.tortoise import BrewEnum
 from app.main import create_app
+from app.models.tortoise import BrewEnum
 
 env = Env()
 env.read_env()
+
+
+brewenum = list(BrewEnum)
+
+brew_ids = [secrets.choice(brewenum) for _ in brewenum]
 
 
 def get_settings_override():
@@ -54,7 +59,7 @@ def client_db():
         yield test_client
 
 
-@pytest.fixture(params=brewenums)
+@pytest.fixture(params=brewenum, ids=brew_ids)
 def brewenums(request):
     """
     This fixture has BrewEnum to test for validity.
