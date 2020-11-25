@@ -3,12 +3,15 @@
 """
 Pytest fixtures and dummy data.
 """
+# import secrets
 import pytest
 from environs import Env
 from fastapi.testclient import TestClient
 from tortoise.contrib.fastapi import register_tortoise
 
 from app.config import Settings, get_settings
+
+# from app.models.tortoise import BrewEnum
 from app.main import create_app
 
 env = Env()
@@ -49,3 +52,11 @@ def client_db():
     with TestClient(app) as test_client:
 
         yield test_client
+
+
+@pytest.fixture(params=brewenums)
+def brewenums(request):
+    """
+    This fixture has BrewEnum to test for validity.
+    """
+    return request.param

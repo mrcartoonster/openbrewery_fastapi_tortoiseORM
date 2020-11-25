@@ -40,9 +40,10 @@ pytest-pythonpath = "^0.7.3"
 backpack = "^0.1"
 pytest-asyncio = "^0.14.0"
 jupyterlab = "^2.2.9"
+pytest-randomly = "^3.5.0"
 
 [tool.pytest.ini_options]
-addopts = "-rssxX -l --tb=short --strict --emoji -vvv -p no:warnings"
+addopts = "-rssxX -l --tb=short --strict --randomly-seed=last --diff-type=split --emoji -vvv -p no:warnings"
 xfail_strict = "True"
 
 [tool.interrogate]
