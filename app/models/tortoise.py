@@ -88,10 +88,6 @@ class Brewery(Model):
     city: Optional[str] = fields.TextField()
     state: Optional[str] = fields.TextField(null=True)
     postal_code: str = fields.TextField()
-    website_url: Optional[str] = fields.TextField(null=True)
-    phone: Optional[str] = fields.TextField(null=True)
-    created_at: Optional[datetime] = fields.DatetimeField(null=True)
-    updated_at: Optional[datetime] = fields.DatetimeField(null=True)
     country: str = fields.TextField()
     longitude: Optional[float] = fields.DecimalField(
         max_digits=12,
@@ -103,6 +99,10 @@ class Brewery(Model):
         decimal_places=8,
         null=True,
     )
+    phone: Optional[str] = fields.TextField(null=True)
+    website_url: Optional[str] = fields.TextField(null=True)
+    updated_at: Optional[datetime] = fields.DatetimeField(null=True)
+    created_at: Optional[datetime] = fields.DatetimeField(null=True)
 
     class Meta:
         """
