@@ -77,4 +77,4 @@ async def breweries(
 
         return await booze
     else:
-        return await beer.all().limit(20)
+        return await beer.all().limit(per_page)
