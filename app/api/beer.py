@@ -57,7 +57,7 @@ async def breweries(
     beer = Brewery
     booze = ""
 
-    if any((by_city, by_type, by_name, by_state)):
+    if any((by_city, by_type, by_name, by_state, by_postal)):
 
         if by_city:
 
@@ -131,6 +131,23 @@ async def breweries(
 
             else:
                 booze = booze.filter(state=by_state.title()).limit(per_page)
+
+        if by_postal:
+
+            if isinstance(booze, QuerySet) is False:
+                booze = beer.filter(postal_code__icontains=by_postal).limit(
+                    per_page,
+                )
+
+            elif booze.exists():
+                booze = booze.filter(postal_code__icontains=by_postal).limit(
+                    per_page,
+                )
+
+            else:
+                booze = booze.filter(postal_code__icontains=by_postal).limit(
+                    per_page,
+                )
 
         return await booze
 

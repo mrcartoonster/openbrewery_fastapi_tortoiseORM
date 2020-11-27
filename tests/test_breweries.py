@@ -175,7 +175,7 @@ def test_by_state_failing(client_db):
     r_json = response.json()
 
     # THEN assert detail response is returned
-    assert r_json["detail"] == "Fl is not a state in the U.S."
+    assert r_json["detail"] == "fl is not a state in the U.S."
 
 
 def test_by_postal_code_passing(client_db):
@@ -183,4 +183,18 @@ def test_by_postal_code_passing(client_db):
     Ensure that when valid US zip code is given, breweries in that zip
     code are in the Response.
     """
-    pass
+    # GIVEN FastAPI Get request to breweries endpoint
+
+    # When GET request to `postal_code` with correct zip code
+    response = client.get(
+        "/breweries",
+        params={"by_postal": "92121"},
+    )
+
+    # THEN assert 200 is still returned
+    assert response.status_code == 200
+
+    r_json = response.json()
+
+    # THEN assert zip code is in respsone
+    assert r_json[0]["postal_code"] == "92121"

@@ -28,7 +28,7 @@ class BrewEnum(str, Enum):
     bar = "bar"
     contract = "contract"
     proprietor = "proprietor"
-    closed = "closed"
+    close = "close"
 
 
 @dataclass
