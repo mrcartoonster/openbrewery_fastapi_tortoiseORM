@@ -57,7 +57,7 @@ async def breweries(
     beer = Brewery
     booze = ""
 
-    if any((by_city, by_type, by_name)):
+    if any((by_city, by_type, by_name, by_state)):
 
         if by_city:
 
@@ -111,6 +111,26 @@ async def breweries(
 
             else:
                 booze = booze.filter(name__icontains=by_name).limit(per_page)
+
+        if by_state:
+
+            if by_state.title() not in await beer.all().distinct().values_list(
+                "state",
+                flat=True,
+            ):
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"{by_state} is not a state in the U.S.",
+                )
+
+            if isinstance(booze, QuerySet) is False:
+                booze = beer.filter(state=by_state.title()).limit(per_page)
+
+            elif booze.exists():
+                booze = booze.filter(state=by_state.title()).limit(per_page)
+
+            else:
+                booze = booze.filter(state=by_state.title()).limit(per_page)
 
         return await booze
 

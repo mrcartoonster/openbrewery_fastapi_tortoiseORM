@@ -2,6 +2,8 @@
 """
 Test location for all brewery endpoints.
 """
+import re
+
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -121,12 +123,64 @@ def test_by_name_passing(client_db):
     # WHEN GET request to `by_name`
     response = client.get(
         "/breweries",
-        params={"by_name": "Dry River Brewing"},
+        params={"by_name": "sel"},
     )
 
     # THEN assert successful response 200
     assert response.status_code == 200
+
     r_json = response.json()
 
-    # THEN assert brewery name is correct
-    assert r_json[0]["name"] == "Dry River Brewing"
+    # THEN assert brewery search name is returned
+    for _ in r_json[:-1]:
+        assert re.search("[Ss]el", _["name"])
+
+
+def test_by_state_passing(client_db):
+    """
+    Ensure correct state is passed.
+    """
+    # GIVEN FastAPI GET request to breweries endpoint
+
+    # WHEN GET request to `by_state`
+    response = client.get(
+        "/breweries",
+        params={"by_state": "florida", "per_page": 2},
+    )
+
+    # THEN assert brewery search returns 200
+    assert response.status_code == 200
+
+    r_json = response.json()
+
+    # THEN assert brewery response only contains requested state
+    assert r_json[0]["state"] == "Florida"
+
+
+def test_by_state_failing(client_db):
+    """
+    When incorrect state is requested, 400 is returned.
+    """
+    # GIVEN FastaAPI Get request to breweries endpoint
+
+    # WHEN GET request to `by_state` with incorrect state.
+    response = client.get(
+        "/breweries",
+        params={"by_state": "fl"},
+    )
+
+    # THEN assert 400 is returned
+    assert response.status_code == 400
+
+    r_json = response.json()
+
+    # THEN assert detail response is returned
+    assert r_json["detail"] == "Fl is not a state in the U.S."
+
+
+def test_by_postal_code_passing(client_db):
+    """
+    Ensure that when valid US zip code is given, breweries in that zip
+    code are in the Response.
+    """
+    pass
