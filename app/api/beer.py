@@ -94,7 +94,7 @@ async def breweries(
                 booze = beer.filter(brewery_type=by_type).limit(per_page)
 
             elif booze.exists():
-                booze = booze.filter(brewery_type=by_type)
+                booze = booze.filter(brewery_type=by_type).limit(per_page)
 
             else:
                 booze = booze.filter(brewery_type=by_type).limit(per_page)
