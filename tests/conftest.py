@@ -22,6 +22,16 @@ brewenum = list(BrewEnum)
 
 brew_ids = [secrets.choice(brewenum) for _ in brewenum]
 
+# Breweries test names
+names = [
+    "Siluria Brewing Company",
+    "Cheaha Brewing Co",
+    "Dry River Brewing",
+    "Alphabet City Brewing Co",
+]
+
+name_ids = [_ for _ in names]
+
 
 def get_settings_override():
     return Settings(testing=1, database_url=env("DEV_DB"))
@@ -65,3 +75,11 @@ def brewenums(request):
     This fixture has BrewEnum to test for validity.
     """
     return request.param
+
+
+@pytest.fixture(params=names, ids=name_ids)
+def name(request):
+    """
+    Test brewery names list for by_name test func.
+    """
+    request.param

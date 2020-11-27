@@ -109,3 +109,24 @@ def test_by_type_and_by_city_passing(client_db):
 
     # THEN assert successful response 200
     assert response.status_code == 200
+
+
+def test_by_name_passing(client_db, name):
+    """
+    Ensure when correct name is passed, brewery is returned.
+    """
+
+    # GIVEN FastAPI GET request to breweries endpoint
+
+    # WHEN GET request to `by_name`
+    response = client.get(
+        "/breweries",
+        params={"by_name": name},
+    )
+
+    # THEN assert successful response 200
+    assert response.status_code == 200
+    r_json = response.json()
+
+    # THEN assert brewery name is correct
+    assert r_json()[0]["name"] == name

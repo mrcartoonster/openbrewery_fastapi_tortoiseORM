@@ -24,6 +24,19 @@ async def breweries(
         None,
         description="Filter breweries by city.",
     ),
+    by_name: Optional[str] = Query(
+        None,
+        description="Filter breweries by name.",
+    ),
+    by_state: Optional[str] = Query(
+        None,
+        description="Filter breweries by state.",
+    ),
+    by_postal: Optional[str] = Query(
+        None,
+        description="Filter breweries by postal code",
+        regex=r"(^\d{5}[-]?\d{4}|\d{5}$)",
+    ),
     by_type: Optional[str] = Query(
         None,
         description=brew_type,
