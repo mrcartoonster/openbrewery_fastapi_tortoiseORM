@@ -78,7 +78,7 @@ def brewenums(request):
 
 
 @pytest.fixture(params=names, ids=name_ids)
-def name(request):
+def naming(request):
     """
     Test brewery names list for by_name test func.
     """

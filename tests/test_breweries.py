@@ -111,7 +111,7 @@ def test_by_type_and_by_city_passing(client_db):
     assert response.status_code == 200
 
 
-def test_by_name_passing(client_db, name):
+def test_by_name_passing(client_db):
     """
     Ensure when correct name is passed, brewery is returned.
     """
@@ -121,7 +121,7 @@ def test_by_name_passing(client_db, name):
     # WHEN GET request to `by_name`
     response = client.get(
         "/breweries",
-        params={"by_name": name},
+        params={"by_name": "Dry River Brewing"},
     )
 
     # THEN assert successful response 200
@@ -129,4 +129,4 @@ def test_by_name_passing(client_db, name):
     r_json = response.json()
 
     # THEN assert brewery name is correct
-    assert r_json()[0]["name"] == name
+    assert r_json[0]["name"] == "Dry River Brewing"

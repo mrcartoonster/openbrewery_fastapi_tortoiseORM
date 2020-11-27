@@ -34,8 +34,10 @@ async def breweries(
     ),
     by_postal: Optional[str] = Query(
         None,
-        description="Filter breweries by postal code",
-        regex=r"(^\d{5}[-]?\d{4}|\d{5}$)",
+        description="Filter breweries by zip code",
+        min_length=5,
+        max_length=10,
+        regex=r"\d{5}(-\d{4})?",
     ),
     by_type: Optional[str] = Query(
         None,
@@ -55,7 +57,7 @@ async def breweries(
     beer = Brewery
     booze = ""
 
-    if any((by_city, by_type)):
+    if any((by_city, by_type, by_name)):
 
         if by_city:
 
@@ -97,6 +99,20 @@ async def breweries(
             else:
                 booze = booze.filter(brewery_type=by_type).limit(per_page)
 
+        if by_name:
+
+            if isinstance(booze, QuerySet) is False:
+                booze = beer.filter(
+                    name__icontains=by_name,
+                ).limit(per_page)
+
+            elif booze.exists():
+                booze = booze.filter(name__icontains=by_name).limit(per_page)
+
+            else:
+                booze = booze.filter(name__icontains=by_name).limit(per_page)
+
         return await booze
+
     else:
         return await beer.all().limit(per_page)
