@@ -154,7 +154,16 @@ async def breweries(
                 )
 
         if sort:
-            pass
+
+            def order(*args):
+                """
+                Will collect field types to order by.
+                """
+                ors = args
+                return ors
+
+            if isinstance(booze, QuerySet) is False:
+                pass
 
         return await booze
 
