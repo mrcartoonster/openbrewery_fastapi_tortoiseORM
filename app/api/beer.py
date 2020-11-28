@@ -2,6 +2,7 @@
 """
 Location of breweries endpoints.
 """
+import logging
 from typing import List, Optional
 
 from fastapi import APIRouter, HTTPException, Query
@@ -12,6 +13,8 @@ from app.desc import brew_type
 from app.models.tortoise import BrewEnum, Brewery, BrewerySchema
 
 router = APIRouter()
+
+log = logging.getLogger(__name__)
 
 
 @router.get(
@@ -48,7 +51,7 @@ async def breweries(
         description="Number of breweries per page.",
         le=50,
     ),
-    sort: Optional[str] = Query(
+    sort: Optional[List[str]] = Query(
         None,
         description="Sort the results by one or more fields.",
     ),
@@ -158,12 +161,28 @@ async def breweries(
             def order(*args):
                 """
                 Will collect field types to order by.
+
+                Will screen out fields that are not in Brewery
+                automatically.
+
                 """
-                ors = args
-                return ors
+                return (
+                    _
+                    for _ in args
+                    if _
+                    in (_["name"] for _ in Brewery.describe()["data_fields"])
+                )
+
+            log.info(f"sort is {sort}")
 
             if isinstance(booze, QuerySet) is False:
-                pass
+                booze = beer.all().order_by(*order(sort)).limit(per_page)
+
+            elif booze.exists():
+                booze = booze.order_by(*order(sort)).limit(per_page)
+
+            else:
+                booze = booze.order_by(*order(sort)).limit(per_page)
 
         return await booze
 
