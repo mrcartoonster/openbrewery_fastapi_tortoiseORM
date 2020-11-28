@@ -48,6 +48,10 @@ async def breweries(
         description="Number of breweries per page.",
         le=50,
     ),
+    sort: Optional[str] = Query(
+        None,
+        description="Sort the results by one or more fields.",
+    ),
 ) -> List[BrewerySchema]:
     """
     Returns a list of breweries.
@@ -57,7 +61,7 @@ async def breweries(
     beer = Brewery
     booze = ""
 
-    if any((by_city, by_type, by_name, by_state, by_postal)):
+    if any((by_city, by_type, by_name, by_state, by_postal, sort)):
 
         if by_city:
 
@@ -148,6 +152,9 @@ async def breweries(
                 booze = booze.filter(postal_code__icontains=by_postal).limit(
                     per_page,
                 )
+
+        if sort:
+            pass
 
         return await booze
 
