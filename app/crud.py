@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Database helper functions.
+Database helper functions and other helper functions.
 """
 from typing import Optional
 
@@ -26,19 +26,20 @@ async def brewery(
     )
 
 
-#   async def get_type(
-#       brew_type: str, per_page: int = 50, page: int = 0
-#   ) -> Optional[dict]:
-#       """
-#       Helper function for the app.beer.by_type endpoint.
-#       """
-#       the_type = (
-#           await Brewery.filter(brewery_type=brew_type.lower())
-#           .limit(50)
-#           .offset(page)
-#       )
+def order(*args):
+    """
+    Will collect field types to order by.
 
-#       if the_type:
-#           return the_type
-#       else:
-#           return None
+    Will screen out fields that are not in Brewery automatically.
+
+    """
+    # Need to unpack the tuple!
+    t = list(args)
+    j = ",".join(t)
+    s = j.split(",")
+    return (
+        _
+        for _ in s
+        if _ in (_["name"] for _ in Brewery.describe()["data_fields"])
+        or _ in Brewery.describe()["pk_field"].values()
+    )

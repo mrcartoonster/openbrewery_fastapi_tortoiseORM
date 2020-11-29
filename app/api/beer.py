@@ -8,7 +8,7 @@ from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Query
 from tortoise.queryset import QuerySet
 
-# from app import crud
+from app.crud import order
 from app.desc import brew_type
 from app.models.tortoise import BrewEnum, Brewery, BrewerySchema
 
@@ -51,7 +51,7 @@ async def breweries(
         description="Number of breweries per page.",
         le=50,
     ),
-    sort: Optional[List[str]] = Query(
+    sort: Optional[str] = Query(
         None,
         description="Sort the results by one or more fields.",
     ),
@@ -157,23 +157,6 @@ async def breweries(
                 )
 
         if sort:
-
-            def order(*args):
-                """
-                Will collect field types to order by.
-
-                Will screen out fields that are not in Brewery
-                automatically.
-
-                """
-                return (
-                    _
-                    for _ in args
-                    if _
-                    in (_["name"] for _ in Brewery.describe()["data_fields"])
-                )
-
-            log.info(f"sort is {sort}")
 
             if isinstance(booze, QuerySet) is False:
                 booze = beer.all().order_by(*order(sort)).limit(per_page)
