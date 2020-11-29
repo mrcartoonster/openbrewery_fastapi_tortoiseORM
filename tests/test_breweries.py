@@ -185,10 +185,10 @@ def test_by_postal_code_passing(client_db):
     """
     # GIVEN FastAPI Get request to breweries endpoint
 
-    # When GET request to `postal_code` with correct zip code
+    # WHEN GET request to `postal_code` with correct zip code
     response = client.get(
         "/breweries",
-        params={"by_postal": "92121"},
+        params={"by_postal": "92121-4396"},
     )
 
     # THEN assert 200 is still returned
@@ -197,4 +197,77 @@ def test_by_postal_code_passing(client_db):
     r_json = response.json()
 
     # THEN assert zip code is in respsone
-    assert r_json[0]["postal_code"] == "92121"
+    assert r_json[0]["postal_code"] == "92121-4396"
+
+
+def test_by_postal_code_regex_failing(client_db):
+    """
+    Ensure that incorrect postal code fails.
+    """
+    # GIVEN FASTAPI GET request to breweries endpoint
+
+    # WHEN GET request to `postal_code` with incorrect zip code
+    response = client.get(
+        "/breweries",
+        params={"by_postal": "912"},
+    )
+
+    # THEN asert 200 is not returned
+    assert response.status_code != 200
+
+
+def test_sort_passing(client_db, field):
+    """
+    Ensure when correct field is given, 200 is returned.
+    """
+    # GIVEN FastAPI GET request to breweries endpoint
+
+    # WHEN GET request to `sort` with correct field
+    response = client.get(
+        "/breweries",
+        params={"sort": field},
+    )
+
+    # THEN assert 200 is returned
+    assert response.status_code == 200
+
+
+def test_sort_regex_failing(client_db):
+    """
+    Ensure that regex is working when incorrect field is passed.
+    """
+    # GIVEN FASTAPI GET request to breweries endpoint
+
+    # WHEN GET reqeust to `sort` with incorrect field
+    response = client.get(
+        "/breweries",
+        params={"sort": "i"},
+    )
+
+    # THEN assert 200 is not returned
+    assert response.status_code != 200
+
+
+def test_sort_failing(client_db, wrong):
+    """
+    Ensure that when incorrect field is passed that passes regex, it
+    fails as well at checkpoint in view function.
+    """
+    # GIVEN FASTAPI GET request to breweries endpoint
+
+    # WHEN GET request to `sort` with passing regex but incorrect filed
+    response = client.get(
+        "/breweries",
+        params={"sort": wrong},
+    )
+
+    # THEN assert 200 is not returned
+    assert response.status_code != 200
+
+    r_json = response.json()
+
+    # THEN assert detail error message is returned
+    assert r_json["detail"] == (
+        f"'{wrong}' not a field."
+        " Check BrewerySchema below for valid fields."
+    )

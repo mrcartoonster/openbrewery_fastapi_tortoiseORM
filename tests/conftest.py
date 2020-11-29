@@ -12,7 +12,7 @@ from tortoise.contrib.fastapi import register_tortoise
 
 from app.config import Settings, get_settings
 from app.main import create_app
-from app.models.tortoise import BrewEnum
+from app.models.tortoise import BrewEnum, Brewery
 
 env = Env()
 env.read_env()
@@ -33,7 +33,18 @@ names = [
 name_ids = [_ for _ in names]
 
 
+# Brewery field names
+fields = [Brewery.describe()["data_fields"][_]["name"] for _ in range(15)]
+fields_id = [_ for _ in fields]
+
+wrong_fields = ["brewery_typ", "address_", "updat"]
+wrong_ids = [_ for _ in wrong_fields]
+
+
 def get_settings_override():
+    """
+    Settings dependencies.
+    """
     return Settings(testing=1, database_url=env("DEV_DB"))
 
 
@@ -83,3 +94,19 @@ def naming(request):
     Test brewery names list for by_name test func.
     """
     request.param
+
+
+@pytest.fixture(params=fields, ids=fields_id)
+def field(request):
+    """
+    Fields name fixtures.
+    """
+    return request.param
+
+
+@pytest.fixture(params=wrong_fields, ids=wrong_ids)
+def wrong(request):
+    """
+    Passing regex but wrong fields.
+    """
+    return request.param

@@ -8,7 +8,7 @@ from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Query
 from tortoise.queryset import QuerySet
 
-from app.crud import order
+from app.crud import FieldEnum, order
 from app.desc import brew_type
 from app.models.tortoise import BrewEnum, Brewery, BrewerySchema
 
@@ -53,7 +53,8 @@ async def breweries(
     ),
     sort: Optional[str] = Query(
         None,
-        description="Sort the results by one or more fields.",
+        description="Sort the results by one field.",
+        regex=r"^(-)?[inbsacplwu]\w.+|(-)?id",
     ),
 ) -> List[BrewerySchema]:
     """
@@ -157,6 +158,15 @@ async def breweries(
                 )
 
         if sort:
+
+            if sort.replace("-", "") not in list(FieldEnum):
+                raise HTTPException(
+                    status_code=400,
+                    detail=(
+                        f"'{sort}' not a field. Check BrewerySchema below"
+                        " for valid fields."
+                    ),
+                )
 
             if isinstance(booze, QuerySet) is False:
                 booze = beer.all().order_by(*order(sort)).limit(per_page)
