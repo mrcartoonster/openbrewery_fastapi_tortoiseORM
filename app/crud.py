@@ -1,31 +1,67 @@
 # -*- coding: utf-8 -*-
 """
-Database helper functions.
+Database helper functions and other helper functions.
 """
+from enum import Enum, unique
 from typing import Optional
 
 from app.models.tortoise import Brewery
 
 
-async def get_city(city: str) -> Optional[dict]:
+def order(*args):
     """
-    Helper function for the app.beer.by_city endpoint.
+    Will collect field type to order by.
     """
-    the_city = await Brewery.filter(city=city.title())
+    # Need to unpack the tuple!
+    t = list(args)
+    j = ",".join(t)
+    return j.split(",")
 
-    if the_city:
-        return the_city
+
+@unique
+class FieldEnum(str, Enum):
+    """
+    Enumarator for fields.
+    """
+
+    id = "id"
+    name = "name"
+    brewery_type = "brewery_type"
+    street = "street"
+    address_2 = "address_2"
+    address_3 = "address_3"
+    city = "city"
+    state = "state"
+    postal_code = "postal_code"
+    country = "country"
+    longitude = "longitude"
+    latitude = "latitude"
+    phone = "phone"
+    website_url = "website_url"
+    updated_at = "updated_at"
+    created_at = "created_at"
+
+
+async def get(id: int) -> Optional[dict]:
+    """
+    Helper ORM function to get brewery by id.
+    """
+    idx = await Brewery.get_or_none(id=id)
+    if idx:
+        return idx
+
     else:
         return None
 
 
-async def get_type(brew_type: str) -> Optional[dict]:
+async def search(term: str, per_page: int) -> Optional[dict]:
     """
-    Helper function for the app.beer.by_type endpoint.
+    Helper ORM function to get search term.
     """
-    the_type = await Brewery.filter(brewery_type=brew_type.lower())
+    item = await Brewery.filter(name__icontains=term).limit(per_page)
 
-    if the_type:
-        return the_type
+    if item:
+        return item
+
     else:
         return None

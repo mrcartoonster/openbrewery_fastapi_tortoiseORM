@@ -2,11 +2,36 @@
 """
 Brewery Tortoise ORM Model.
 """
+from dataclasses import dataclass
+from datetime import datetime
+from enum import Enum, unique
+from typing import Optional
+
 from tortoise import fields
 from tortoise.contrib.pydantic import pydantic_model_creator
 from tortoise.models import Model
 
 
+# Make Enum class again per: https://bit.ly/36VLXUz
+@unique
+class BrewEnum(str, Enum):
+    """
+    Enumarator for Brewery.
+    """
+
+    micro = "micro"
+    nano = "nano"
+    regional = "regional"
+    brewpub = "brewpub"
+    large = "large"
+    planning = "planning"
+    bar = "bar"
+    contract = "contract"
+    proprietor = "proprietor"
+    closed = "closed"
+
+
+@dataclass
 class Brewery(Model):
     """
     This class represents the breweries tables.
@@ -54,30 +79,30 @@ class Brewery(Model):
 
     """
 
-    id = fields.IntField(pk=True)
-    name = fields.TextField()
-    brewery_type = fields.TextField()
-    street = fields.TextField(null=True)
-    address_2 = fields.TextField(null=True)
-    address_3 = fields.TextField(null=True)
-    city = fields.TextField()
-    state = fields.TextField(null=True)
-    postal_code = fields.TextField()
-    website_url = fields.TextField(null=True)
-    phone = fields.TextField(null=True)
-    created_at = fields.DatetimeField(null=True)
-    updated_at = fields.DatetimeField(null=True)
-    country = fields.TextField()
-    longitude = fields.DecimalField(
+    id: int = fields.IntField(pk=True)
+    name: str = fields.TextField()
+    brewery_type: BrewEnum = fields.CharEnumField(BrewEnum)
+    street: Optional[str] = fields.TextField(null=True)
+    address_2: Optional[str] = fields.TextField(null=True)
+    address_3: Optional[str] = fields.TextField(null=True)
+    city: Optional[str] = fields.TextField()
+    state: Optional[str] = fields.TextField(null=True)
+    postal_code: str = fields.TextField()
+    country: str = fields.TextField()
+    longitude: Optional[float] = fields.DecimalField(
         max_digits=12,
         decimal_places=8,
         null=True,
     )
-    latitude = fields.DecimalField(
+    latitude: Optional[float] = fields.DecimalField(
         max_digits=12,
         decimal_places=8,
         null=True,
     )
+    phone: Optional[str] = fields.TextField(null=True)
+    website_url: Optional[str] = fields.TextField(null=True)
+    updated_at: Optional[datetime] = fields.DatetimeField(null=True)
+    created_at: Optional[datetime] = fields.DatetimeField(null=True)
 
     class Meta:
         """

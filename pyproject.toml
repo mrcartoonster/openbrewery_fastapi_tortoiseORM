@@ -10,6 +10,8 @@ fastapi = {extras = ["all"], version = "^0.61.1"}
 gunicorn = "^20.0.4"
 httpx = "^0.16.1"
 tortoise-orm = {extras = ["asyncpg"], version = "^0.16.18"}
+backpack = "^0.1"
+pendulum = "^2.1.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
@@ -37,9 +39,12 @@ dump-env = "^1.2.0"
 pyperclip = "^1.8.1"
 pytest-pythonpath = "^0.7.3"
 backpack = "^0.1"
+pytest-asyncio = "^0.14.0"
+jupyterlab = "^2.2.9"
+pytest-randomly = "^3.5.0"
 
 [tool.pytest.ini_options]
-addopts = "-rssxX -l --tb=short --strict --emoji -vvv"
+addopts = "-rssxX -l --tb=short --strict --randomly-seed=last --diff-type=split --emoji -vvv -p no:warnings"
 xfail_strict = "True"
 
 [tool.interrogate]

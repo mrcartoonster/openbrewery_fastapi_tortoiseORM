@@ -6,7 +6,7 @@ served.
 """
 from fastapi import FastAPI
 
-from app.api import beer, ping
+from app.api import beer
 from app.db import init_db
 
 from .desc import desc
@@ -26,7 +26,6 @@ def create_app() -> FastAPI:
     )
 
     # API endpoints
-    app.include_router(ping.router)  # Test endpoint.
     app.include_router(beer.router, prefix="/breweries", tags=["beer"])
 
     return app

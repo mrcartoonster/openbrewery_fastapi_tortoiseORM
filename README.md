@@ -16,6 +16,10 @@ Don't forget to star [FastAPI](https://github.com/tiangolo/fastapi)! FastAPI nee
 * Instgram at [@pizzamachinegun](https://www.instagram.com/pizzamachinegun/)
 * As well as email me at [mrcartoonster@fastmail.com](mrcartoonster@fastmail.com) for business inquiries.
 
+## FastAPI Extensions
+---
+
+These are the FastAPI extensions used in thei app
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
