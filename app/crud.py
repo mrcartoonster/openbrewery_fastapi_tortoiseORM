@@ -2,7 +2,7 @@
 """
 Database helper functions and other helper functions.
 """
-from enum import Enum
+from enum import Enum, unique
 from typing import Optional
 
 from app.models.tortoise import Brewery
@@ -10,10 +10,7 @@ from app.models.tortoise import Brewery
 
 def order(*args):
     """
-    Will collect field types to order by.
-
-    Will screen out fields that are not in Brewery automatically.
-
+    Will collect field type to order by.
     """
     # Need to unpack the tuple!
     t = list(args)
@@ -21,6 +18,7 @@ def order(*args):
     return j.split(",")
 
 
+@unique
 class FieldEnum(str, Enum):
     """
     Enumarator for fields.
@@ -44,20 +42,12 @@ class FieldEnum(str, Enum):
     created_at = "created_at"
 
 
-async def brewery(
-    by_city: Optional[str] = None,
-    by_type: Optional[str] = None,
-    per_page: int = 20,
-    page: int = 0,
-) -> Optional[dict]:
+async def get(id: int) -> Optional[dict]:
     """
-    Helper function for the app.beer.breweries endpoint.
+    Helper ORM function to get brewery by id.
     """
-    return (
-        Brewery.filter(
-            city=by_city,
-            brewery_type=by_type,
-        )
-        .limit(per_page)
-        .offset(page)
-    )
+    idx = await Brewery.get_or_none(id)
+    if idx:
+        return idx
+    else:
+        return None

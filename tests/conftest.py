@@ -62,7 +62,7 @@ def test_app():
 
 
 @pytest.fixture(scope="session")
-def client_db():
+def db():
     """
     Getting db to test.
     """

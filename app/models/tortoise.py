@@ -16,7 +16,7 @@ from tortoise.models import Model
 @unique
 class BrewEnum(str, Enum):
     """
-    Enum for Brewery.
+    Enumarator for Brewery.
     """
 
     micro = "micro"

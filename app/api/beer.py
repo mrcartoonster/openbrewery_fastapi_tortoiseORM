@@ -2,19 +2,17 @@
 """
 Location of breweries endpoints.
 """
-import logging
 from typing import List, Optional
 
 from fastapi import APIRouter, HTTPException, Query
 from tortoise.queryset import QuerySet
 
+from app import crud
 from app.crud import FieldEnum, order
 from app.desc import brew_type
 from app.models.tortoise import BrewEnum, Brewery, BrewerySchema
 
 router = APIRouter()
-
-log = logging.getLogger(__name__)
 
 
 @router.get(
@@ -181,3 +179,19 @@ async def breweries(
 
     else:
         return await beer.all().limit(per_page)
+
+
+@router.get("/breweries/{id}")
+async def get_brewerys(id):
+    """
+    Get a single brewery.
+    """
+    idx = await crud.get(id)
+
+    if not idx:
+        raise HTTPException(
+            status_code=404,
+            detail=f"{id} is not an id of a Brewery in this API.",
+        )
+    else:
+        return idx
