@@ -289,13 +289,44 @@ def test_get_brewery_passing(db, brew_ids):
 
     response_dict = response.json()
 
-    # THEN assert corred id is associated
+    # THEN assert correct id is associated
     assert response_dict["id"] == brew_ids
 
 
-def test_get_brewery_failing(db):
+def test_get_brewery_failing(db, wrong_ids):
     """
     Ensure when incorrect ids are given, that 404 is returned with
     correct detail message.
     """
-    pass
+    # GIVEN FastAPI GET request to breweries/{id}
+
+    # WHEN GET request is given incorrect id
+    response = client.get(
+        f"/breweries/{wrong_ids}",
+    )
+
+    # THEN assert 404 is returned
+    assert response.status_code == 404
+
+    response_dict = response.json()
+
+    # THEN assert correct detail is returned
+    assert response_dict["detail"] == (
+        f"{wrong_ids} is not an id of a Brewery in this API."
+    )
+
+
+def test_search_passing(db):
+    """
+    Ensure ability to search for breweries by search.
+    """
+    # GIVEN FasatAPI GET request to breweries/search=?query=...
+
+    # WHEN GET request is given a valid word
+    response = client.get(
+        "/breweries/search",
+        params={"query": "dog"},
+    )
+
+    # THEN assert GET request is not non and 200
+    assert response.status_code == 200

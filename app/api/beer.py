@@ -23,6 +23,7 @@ router = APIRouter()
 async def breweries(
     by_city: Optional[str] = Query(
         None,
+        summary="Get a brewery by city.",
         description="Filter breweries by city.",
     ),
     by_name: Optional[str] = Query(
@@ -181,8 +182,12 @@ async def breweries(
         return await beer.all().limit(per_page)
 
 
-@router.get("/{id}/")
-async def get_brewerys(id: int):
+@router.get(
+    "/{id}/",
+    response_model=BrewerySchema,
+    response_model_exclude_none=True,
+)
+async def get_breweries(id: int):
     """
     Get a single brewery.
     """
@@ -190,8 +195,20 @@ async def get_brewerys(id: int):
 
     if not idx:
         raise HTTPException(
-            status_code=422,
+            status_code=404,
             detail=f"{id} is not an id of a Brewery in this API.",
         )
     else:
         return idx
+
+
+@router.get(
+    "/search/{search}",
+    response_model=List[BrewerySchema],
+    response_model_exclude_none=True,
+)
+async def brewery_search(search):
+    """
+    General search of brewery with search term.
+    """
+    pass

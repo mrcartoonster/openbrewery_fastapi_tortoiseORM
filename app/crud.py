@@ -51,3 +51,10 @@ async def get(id: int) -> Optional[dict]:
         return idx
     else:
         return None
+
+
+async def search(term: str) -> Optional[dict]:
+    """
+    Helper ORM function to get search term.
+    """
+    pass
