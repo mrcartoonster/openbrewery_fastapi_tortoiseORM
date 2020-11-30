@@ -330,3 +330,30 @@ def test_search_passing(db):
 
     # THEN assert GET request is not non and 200
     assert response.status_code == 200
+
+    response_dict = response.json()
+
+    # THEN assert request isn't greater than 20
+    assert len(response_dict) <= 20
+
+
+def test_search_failing(db):
+    """
+    Ensure that if unfound search term enterd, 404 returned with detail
+    error.
+    """
+    # GIVEN FastAPI GET request to breweries/search=?query=...
+
+    # WHEN GET request is given invalid symbol/word
+    response = client.get(
+        "/breweries/search",
+        params={"query": "^"},
+    )
+
+    # THEN assert Get reqeust is 404
+    assert response.status_code == 404
+
+    response_dict = response.json()
+
+    # THEN assert detail is given
+    assert response_dict["detail"] == "'^' didn't return anything."

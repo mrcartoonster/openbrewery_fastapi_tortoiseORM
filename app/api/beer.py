@@ -212,20 +212,26 @@ async def get_breweries(
     response_model_exclude_none=True,
 )
 async def brewery_search(
-    search: str = Query(
+    query: str = Query(
         ...,
         title="Get a list of breweries with name search.",
-    )
+    ),
+    per_page: int = Query(
+        20,
+        title="Number of breweries returned",
+        le=50,
+    ),
 ) -> List[BrewerySchema]:
     """
     General search of brewery with search term.
     """
-    item = await crud.search(search)
+    if query:
+        item = await crud.search(query, per_page)
 
-    if not item:
-        raise HTTPException(
-            status_code=404,
-            detail=f"{item} didn't return anything.",
-        )
-    else:
-        return item
+        if not item:
+            raise HTTPException(
+                status_code=404,
+                detail=f"'{query}' didn't return anything.",
+            )
+        else:
+            return item
