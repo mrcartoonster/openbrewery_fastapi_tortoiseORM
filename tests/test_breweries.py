@@ -273,7 +273,7 @@ def test_sort_failing(db, wrong):
     )
 
 
-def test_get_brewery_passing(db):
+def test_get_brewery_passing(db, brew_ids):
     """
     Ensure the when pased correct id, returns brewery.
     """
@@ -281,8 +281,21 @@ def test_get_brewery_passing(db):
 
     # WHEN GET request is given numeric id
     response = client.get(
-        "/breweries/5494",
+        f"/breweries/{brew_ids}",
     )
 
     # THEN assert 200 is returned
     assert response.status_code == 200
+
+    response_dict = response.json()
+
+    # THEN assert corred id is associated
+    assert response_dict["id"] == brew_ids
+
+
+def test_get_brewery_failing(db):
+    """
+    Ensure when incorrect ids are given, that 404 is returned with
+    correct detail message.
+    """
+    pass

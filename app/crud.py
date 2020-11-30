@@ -46,7 +46,7 @@ async def get(id: int) -> Optional[dict]:
     """
     Helper ORM function to get brewery by id.
     """
-    idx = await Brewery.get_or_none(id)
+    idx = await Brewery.get_or_none(id=id)
     if idx:
         return idx
     else:

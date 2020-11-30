@@ -181,8 +181,8 @@ async def breweries(
         return await beer.all().limit(per_page)
 
 
-@router.get("/breweries/{id}")
-async def get_brewerys(id):
+@router.get("/{id}/")
+async def get_brewerys(id: int):
     """
     Get a single brewery.
     """
@@ -190,7 +190,7 @@ async def get_brewerys(id):
 
     if not idx:
         raise HTTPException(
-            status_code=404,
+            status_code=422,
             detail=f"{id} is not an id of a Brewery in this API.",
         )
     else:

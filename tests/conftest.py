@@ -40,6 +40,15 @@ fields_id = [_ for _ in fields]
 wrong_fields = ["brewery_typ", "address_", "updat"]
 wrong_ids = [_ for _ in wrong_fields]
 
+brewery_ids = [25, 26, 55, 93, 70]
+
+ran_ids = [secrets.choice(brewery_ids) for _ in range(6)]
+
+ids_ran = [_ for _ in ran_ids]
+
+non_ids = [secrets.choice(range(0, 10)) for _ in range(5)]
+ids_non = [_ for _ in non_ids]
+
 
 def get_settings_override():
     """
@@ -108,5 +117,21 @@ def field(request):
 def wrong(request):
     """
     Passing regex but wrong fields.
+    """
+    return request.param
+
+
+@pytest.fixture(params=ran_ids, ids=ids_ran)
+def brew_ids(request):
+    """
+    Test ids for brew_ids.
+    """
+    return request.param
+
+
+@pytest.fixture(scope="function", params=non_ids, ids=ids_non)
+def wrong_ids(request):
+    """
+    Will give wrong ids to make sure of failure.
     """
     return request.param
