@@ -49,6 +49,7 @@ async def get(id: int) -> Optional[dict]:
     idx = await Brewery.get_or_none(id=id)
     if idx:
         return idx
+
     else:
         return None
 
@@ -57,4 +58,10 @@ async def search(term: str) -> Optional[dict]:
     """
     Helper ORM function to get search term.
     """
-    pass
+    item = await Brewery.filter(name__icontains=term)
+
+    if item:
+        return item
+
+    else:
+        return None

@@ -4,7 +4,7 @@ Location of breweries endpoints.
 """
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Path, Query
 from tortoise.queryset import QuerySet
 
 from app import crud
@@ -23,7 +23,6 @@ router = APIRouter()
 async def breweries(
     by_city: Optional[str] = Query(
         None,
-        summary="Get a brewery by city.",
         description="Filter breweries by city.",
     ),
     by_name: Optional[str] = Query(
@@ -187,7 +186,12 @@ async def breweries(
     response_model=BrewerySchema,
     response_model_exclude_none=True,
 )
-async def get_breweries(id: int):
+async def get_breweries(
+    id: int = Path(
+        ...,
+        title="Brewery ID",
+    )
+) -> BrewerySchema:
     """
     Get a single brewery.
     """
@@ -203,12 +207,25 @@ async def get_breweries(id: int):
 
 
 @router.get(
-    "/search/{search}",
+    "/search",
     response_model=List[BrewerySchema],
     response_model_exclude_none=True,
 )
-async def brewery_search(search):
+async def brewery_search(
+    search: str = Query(
+        ...,
+        title="Get a list of breweries with name search.",
+    )
+) -> List[BrewerySchema]:
     """
     General search of brewery with search term.
     """
-    pass
+    item = await crud.search(search)
+
+    if not item:
+        raise HTTPException(
+            status_code=404,
+            detail=f"{item} didn't return anything.",
+        )
+    else:
+        return item
