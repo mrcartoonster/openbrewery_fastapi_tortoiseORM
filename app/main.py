@@ -5,8 +5,8 @@ This is where our FastAPI endpoint routers from sponsors and beers are
 served.
 """
 import sentry_sdk
-from fastapi import FastAPI
 from environs import ENV
+from fastapi import FastAPI
 
 from app.api import beer
 from app.db import init_db
@@ -18,8 +18,8 @@ env.read_env()
 
 
 sentry_sdk.init(
-    env('SENTRY'),
-    traces_sample_rate=1.0
+    env("SENTRY"),
+    traces_sample_rate=1.0,
 )
 
 
