@@ -5,7 +5,6 @@ Location of breweries endpoints.
 import sys
 from typing import List, Optional
 
-import timber
 from environs import Env
 from fastapi import APIRouter, HTTPException, Path, Query
 from loguru import logger
@@ -14,6 +13,7 @@ from tortoise.queryset import QuerySet
 from app import crud
 from app.crud import FieldEnum, order
 from app.desc import brew_type, fmt
+from app.logger import log
 from app.models.tortoise import BrewEnum, Brewery, BrewerySchema
 
 router = APIRouter()
@@ -22,20 +22,11 @@ router = APIRouter()
 env = Env()
 env.read_env()
 
-timber_handler = timber.TimberHandler(
-    source_id=env("SOURCE"),
-    api_key=env("TIMBER"),
-)
-
 
 logger.add(
     sys.stderr,
     format=fmt,
     level="INFO",
-)
-
-logger.add(
-    timber_handler,
 )
 
 
@@ -84,6 +75,7 @@ async def breweries(
     """
 
     logger.info("Breweries called")
+    log.info("Breweries called")
 
     # TODO Refactor to make this DRY
     beer = Brewery
@@ -95,6 +87,7 @@ async def breweries(
         logger.info(f"Getting {by_type}")
         logger.info(f"Getting {by_name}")
         logger.info(f"Getting {by_state}")
+        log.info(f"Getting {by_city}")
 
         if by_city:
 
@@ -228,7 +221,10 @@ async def get_breweries(
     """
 
     logger.info("Search Breweries called")
+    log.info("Search Breweries called")
     idx = await crud.get(id)
+
+    log.info(f"idx is {idx}")
 
     if not idx:
         raise HTTPException(
@@ -260,6 +256,8 @@ async def brewery_search(
     """
 
     logger.info("Get Breweires called")
+    log.info("Get Breweires called")
+
     if query:
         item = await crud.search(query, per_page)
 
