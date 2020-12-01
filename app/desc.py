@@ -35,6 +35,6 @@ Must be one of:
 
 # logging fmt
 fmt = (
-    "<G>{level}</> - <bold>{name}</> - "
-    "{time:YY.MM.DD at hh:mm:ss A zz} - {module} - <le>{message}</>"
+    "<G>{level}</>:     <le>{message}</> "
+    "<fg #3DDC2B>{time:YYYY.MM.DD at hh:mm:ss A zz}</>"
 )

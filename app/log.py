@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# logger.py
+# log.py
 """
-Working logger to track settings and other information.
+Working log to track settings and other information.
 
 We'll convert to a new log config file.
 
@@ -11,9 +11,9 @@ import logging
 from environs import Env
 from logdna import LogDNAHandler
 
-logger = logging.getLogger("logdna")
+log = logging.getLogger("logdna")
 
-logger.setLevel(logging.INFO)
+log.setLevel(logging.INFO)
 
 env = Env()
 env.read_env()
@@ -32,5 +32,5 @@ shell_formatter = logging.Formatter(fmt_shell)
 shell_handler.setFormatter(shell_formatter)
 
 
-logger.addHandler(shell_handler)
-logger.addHandler(logdna_handler)
+log.addHandler(shell_handler)
+log.addHandler(logdna_handler)
