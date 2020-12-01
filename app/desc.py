@@ -31,3 +31,10 @@ Must be one of:
 * `proprietor` - Similar to contract brewing but refers more to a brewery incubator.
 * `close` - A location which has been closed.
 """
+
+
+# logging fmt
+fmt = (
+    "<G>{level}</>:     <le>{message}</> "
+    "<fg #3DDC2B>{time:YYYY.MM.DD at hh:mm:ss A zz}</>"
+)

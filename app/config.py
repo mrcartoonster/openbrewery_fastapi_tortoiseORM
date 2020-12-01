@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     Setting defaults to dev environment.
     """
 
-    environment: str = os.getenv("ENIRONMENT", "dev")
+    environment: str = os.getenv("ENVIRONMENT", "dev")
     testing: bool = os.getenv("TESTING", 0)
     database_url: PostgresDsn = DEV_DB
 

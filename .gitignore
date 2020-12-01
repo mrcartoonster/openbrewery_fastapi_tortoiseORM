@@ -4,6 +4,7 @@
 
 ### Linux ###
 OpenBreweryDB
+logs
 *~
 *.yaml
 htmlcov
