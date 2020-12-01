@@ -13,8 +13,8 @@ tortoise-orm = {extras = ["asyncpg"], version = "^0.16.18"}
 backpack = "^0.1"
 pendulum = "^2.1.2"
 loguru = "^0.5.3"
-timber = "^2.1.0"
 sentry-sdk = "^0.19.4"
+logdna = "^1.5.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
