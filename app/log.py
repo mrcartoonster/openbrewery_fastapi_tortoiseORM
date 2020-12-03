@@ -10,6 +10,7 @@ import logging
 
 from environs import Env
 from logdna import LogDNAHandler
+from timber import TimberHandler
 
 log = logging.getLogger("logdna")
 
@@ -19,9 +20,15 @@ env = Env()
 env.read_env()
 
 key = env("LOGDNA")
+source = env("SOURCE")
+timber_key = env("TIMBER")
 
 shell_handler = logging.StreamHandler()
 logdna_handler = LogDNAHandler(key)
+timber_handler = TimberHandler(
+    source_id=source,
+    api_key=timber_key,
+)
 
 shell_handler.setLevel(logging.DEBUG)
 
@@ -34,3 +41,4 @@ shell_handler.setFormatter(shell_formatter)
 
 log.addHandler(shell_handler)
 log.addHandler(logdna_handler)
+log.addHandler(timber_handler)

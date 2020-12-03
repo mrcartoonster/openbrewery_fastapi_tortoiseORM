@@ -64,7 +64,6 @@ async def startup():
     Starting up tortoise for FastAPI.
     """
     log.info("Database startup")
-    log.info("Starting")
     init_db(app)
 
 

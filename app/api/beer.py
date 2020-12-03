@@ -268,6 +268,8 @@ async def brewery_search(
             )
 
             log.info(f"Not {item}")
+            logger.info(f"Not {item}")
 
         else:
+            logger.info("Returning search")
             return item
