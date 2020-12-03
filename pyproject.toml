@@ -15,6 +15,9 @@ pendulum = "^2.1.2"
 loguru = "^0.5.3"
 sentry-sdk = "^0.19.4"
 logdna = "^1.5.3"
+python-dotenv = "^0.15.0"
+email-validator = "^1.1.2"
+timber = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"

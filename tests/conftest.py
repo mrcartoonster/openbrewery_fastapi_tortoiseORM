@@ -20,7 +20,7 @@ env.read_env()
 
 brewenum = list(BrewEnum)
 
-brew_ids = [secrets.choice(brewenum) for _ in brewenum]
+brew_ids = (secrets.choice(brewenum) for _ in brewenum)
 
 # Breweries test names
 names = [
@@ -54,7 +54,7 @@ def get_settings_override():
     """
     Settings dependencies.
     """
-    return Settings(testing=1, database_url=env("DEV_DB"))
+    return Settings(testing=1, database_url=env("DATABASE_URL"))
 
 
 @pytest.fixture(scope="module")
@@ -79,7 +79,7 @@ def db():
     app.dependency_overrides[get_settings] = get_settings_override
     register_tortoise(
         app,
-        db_url=env("DEV_DB"),
+        db_url=env("DATABASE_URL"),
         modules={"models": ["app.models.tortoise"]},
         generate_schemas=True,
         add_exception_handlers=True,

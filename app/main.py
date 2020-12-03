@@ -10,7 +10,7 @@ from environs import Env
 from fastapi import FastAPI
 from loguru import logger
 
-from app.api import beer
+from app.api import beer, ping
 from app.db import init_db
 from app.log import log
 
@@ -27,7 +27,7 @@ logger.add(
 )
 
 logger.add(
-    "logs/logged_{time:YYYY-MM-DD at hh:mm:ss A zz}.log",
+    "logs/logged_{time:YY-MM-DD}",
     rotation="2 days",
 )
 
@@ -46,7 +46,16 @@ def create_app() -> FastAPI:
     )
 
     # API endpoints
+    app.include_router(ping.router, tags=["ping"])
     app.include_router(beer.router, prefix="/breweries", tags=["beer"])
+
+    # Middlewares
+
+    # app.add_middleware(SentryAsgiMiddleware)
+    # Add FastAPI's https redirect middleware when deploying as well as
+    # FastAPI's TrustedHostMiddleWare
+    # https://fastapi.tiangolo.com/advanced/middleware/#httpsredirectmiddleware
+    # https://fastapi.tiangolo.com/advanced/middleware/#trustedhostmiddleware
 
     # logger testings
     log.info("FastAPI created")

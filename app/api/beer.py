@@ -29,7 +29,7 @@ logger.add(
 )
 
 logger.add(
-    "logs/logged_{time:YYYY-MM-DD at hh:mm:ss A zz}.log",
+    "../logs/logged_{time:YYYY-MM-DD at hh:mm:ss A zz}.log",
     rotation="2 days",
 )
 
@@ -268,6 +268,8 @@ async def brewery_search(
             )
 
             log.info(f"Not {item}")
+            logger.info(f"Not {item}")
 
         else:
+            logger.info("Returning search")
             return item
