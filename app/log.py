@@ -10,11 +10,13 @@ import logging
 
 import sentry_sdk
 from environs import Env
-from logdna import LogDNAHandler
+
+# from logdna import LogDNAHandler
 from sentry_sdk.integrations.logging import LoggingIntegration
 from timber import TimberHandler
 
-log = logging.getLogger("logdna")
+# log = logging.getLogger("logdna")
+log = logging.getLogger(__name__)
 
 log.setLevel(logging.INFO)
 
@@ -27,7 +29,6 @@ timber_key = env("TIMBER")
 sentry = env("DSN")
 
 
-# All of this is already happening by default!
 sentry_logging = LoggingIntegration(
     level=logging.INFO,  # Capture info and above as breadcrumbs
     event_level=logging.ERROR,  # Send errors as events
@@ -38,7 +39,7 @@ sentry_sdk.init(
 )
 
 shell_handler = logging.StreamHandler()
-logdna_handler = LogDNAHandler(key)
+# logdna_handler = LogDNAHandler(key)
 timber_handler = TimberHandler(
     source_id=source,
     api_key=timber_key,
@@ -54,5 +55,5 @@ shell_handler.setFormatter(shell_formatter)
 
 
 log.addHandler(shell_handler)
-log.addHandler(logdna_handler)
 log.addHandler(timber_handler)
+# log.addHandler(logdna_handler)

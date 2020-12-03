@@ -6,11 +6,9 @@ served.
 """
 import sys
 
-import sentry_sdk
 from environs import Env
 from fastapi import FastAPI
 from loguru import logger
-from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 from app.api import beer, ping
 from app.db import init_db
@@ -51,11 +49,9 @@ def create_app() -> FastAPI:
     app.include_router(ping.router, tags=["ping"])
     app.include_router(beer.router, prefix="/breweries", tags=["beer"])
 
-    # Sentry init
-    sentry_sdk.init(dsn=env("DSN"))
-
     # Middlewares
-    app.add_middleware(SentryAsgiMiddleware)
+
+    # app.add_middleware(SentryAsgiMiddleware)
     # Add FastAPI's https redirect middleware when deploying as well as
     # FastAPI's TrustedHostMiddleWare
     # https://fastapi.tiangolo.com/advanced/middleware/#httpsredirectmiddleware
