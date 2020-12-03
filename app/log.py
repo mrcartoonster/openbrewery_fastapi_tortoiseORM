@@ -8,8 +8,10 @@ We'll convert to a new log config file.
 """
 import logging
 
+import sentry_sdk
 from environs import Env
 from logdna import LogDNAHandler
+from sentry_sdk.integrations.logging import LoggingIntegration
 from timber import TimberHandler
 
 log = logging.getLogger("logdna")
@@ -22,6 +24,18 @@ env.read_env()
 key = env("LOGDNA")
 source = env("SOURCE")
 timber_key = env("TIMBER")
+sentry = env("DSN")
+
+
+# All of this is already happening by default!
+sentry_logging = LoggingIntegration(
+    level=logging.INFO,  # Capture info and above as breadcrumbs
+    event_level=logging.ERROR,  # Send errors as events
+)
+sentry_sdk.init(
+    dsn=sentry,
+    integrations=[sentry_logging],
+)
 
 shell_handler = logging.StreamHandler()
 logdna_handler = LogDNAHandler(key)

@@ -36,12 +36,15 @@ class Settings(BaseSettings):
     database_url: PostgresDsn
 
     logger.info("Settings created")
+    log.info("Settings created")
 
     class Config:
         """
         Reading .env file.
         """
 
+        logger.info("Getting .env")
+        log.info("Getting .env")
         env_file = Path(".env")
 
 
