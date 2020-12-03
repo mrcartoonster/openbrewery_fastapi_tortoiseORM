@@ -3,18 +3,26 @@
 """
 File that defines app's environment-specific config variables.
 """
+import sys
 
-import os
 from functools import lru_cache
 from pathlib import Path
 
-from environs import Env
+from loguru import logger
 from pydantic import BaseSettings, PostgresDsn
+from app.desc import fmt
 
-env = Env()
-env.read_env()
 
-DEV_DB = env("DEV_DB")
+logger.add(
+    sys.stderr,
+    format=fmt,
+    level="INFO",
+)
+
+logger.add(
+    "logs/logged_{time:YY-MM-DD}",
+    rotation="2 days",
+)
 
 
 class Settings(BaseSettings):
@@ -22,16 +30,18 @@ class Settings(BaseSettings):
     Setting defaults to dev environment.
     """
 
-    environment: str = os.getenv("ENVIRONMENT", "dev")
-    testing: bool = os.getenv("TESTING", 0)
-    database_url: PostgresDsn = DEV_DB
+    environment: str
+    testing: bool
+    database_url: PostgresDsn
+
+    logger.info("Settings created")
 
     class Config:
         """
         Reading .env file.
         """
 
-        env_file = Path("../.env")
+        env_file = Path(".env")
 
 
 @lru_cache()
@@ -39,4 +49,5 @@ def get_settings() -> BaseSettings:
     """
     Dependency injection of settings.
     """
+    logger.info("Loading config settings from environment")
     return Settings()

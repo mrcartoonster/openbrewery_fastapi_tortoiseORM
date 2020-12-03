@@ -20,7 +20,7 @@ env.read_env()
 
 brewenum = list(BrewEnum)
 
-brew_ids = [secrets.choice(brewenum) for _ in brewenum]
+brew_ids = (secrets.choice(brewenum) for _ in brewenum)
 
 # Breweries test names
 names = [

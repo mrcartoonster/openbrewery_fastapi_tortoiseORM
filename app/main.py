@@ -27,8 +27,7 @@ logger.add(
 )
 
 logger.add(
-    # "logs/logged_{time:YYYY-MM-DD at hh:mm:ss A zz}.log",
-    "../logs/logged_{time:YY-MM-DD}",
+    "logs/logged_{time:YY-MM-DD}",
     rotation="2 days",
 )
 
