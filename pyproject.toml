@@ -18,6 +18,7 @@ logdna = "^1.5.3"
 python-dotenv = "^0.15.0"
 email-validator = "^1.1.2"
 timber = "^2.1.0"
+fastapi-pagination = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
@@ -47,6 +48,7 @@ backpack = "^0.1"
 pytest-asyncio = "^0.14.0"
 jupyterlab = "^2.2.9"
 pytest-randomly = "^3.5.0"
+trio = "^0.17.0"
 
 [tool.pytest.ini_options]
 addopts = "-rssxX -l --tb=short --strict --randomly-seed=last --diff-type=split --emoji -vvv -p no:warnings"
