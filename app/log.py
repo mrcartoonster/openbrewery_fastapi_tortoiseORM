@@ -10,12 +10,9 @@ import logging
 
 import sentry_sdk
 from environs import Env
-
-# from logdna import LogDNAHandler
 from sentry_sdk.integrations.logging import LoggingIntegration
 from timber import TimberHandler
 
-# log = logging.getLogger("logdna")
 log = logging.getLogger(__name__)
 
 log.setLevel(logging.INFO)
@@ -56,4 +53,3 @@ shell_handler.setFormatter(shell_formatter)
 
 log.addHandler(shell_handler)
 log.addHandler(timber_handler)
-# log.addHandler(logdna_handler)

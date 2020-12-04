@@ -64,9 +64,9 @@ async def breweries(
         description=brew_type,
     ),
     per_page: int = Query(
-        20,
+        50,
         description="Number of breweries per page.",
-        le=50,
+        le=100,
     ),
     sort: Optional[str] = Query(
         None,

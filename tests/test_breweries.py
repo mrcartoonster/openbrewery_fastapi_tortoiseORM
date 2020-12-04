@@ -31,7 +31,7 @@ def test_by_city_passing(db):
     assert resp_json[0]["city"] == "Miami"
 
     # THEN assert quantity of response is equal to or less than 20
-    assert len(resp_json) <= 20
+    assert len(resp_json) <= 50
 
 
 def test_by_city_failing(db):
@@ -334,7 +334,7 @@ def test_search_passing(db):
     response_dict = response.json()
 
     # THEN assert request isn't greater than 20
-    assert len(response_dict) <= 20
+    assert len(response_dict) <= 50
 
 
 def test_search_failing(db):
