@@ -110,7 +110,7 @@ async def breweries(
 
         if by_type:
 
-            if by_type not in Page(BrewEnum):
+            if by_type not in list(BrewEnum):
 
                 raise HTTPException(
                     status_code=422,
@@ -247,10 +247,9 @@ async def brewery_search(
     logger.info("Searching Breweries")
 
     if query:
-        # booze = await crud.search(query)
         booze = Brewery.filter(name__icontains=query)
 
-        if not booze:
+        if not await booze.exists():
             raise HTTPException(
                 status_code=404,
                 detail=f"'{query}' didn't return anything.",
@@ -261,5 +260,4 @@ async def brewery_search(
 
         else:
             logger.info("Returning search")
-            # return paginate(booze)
             return await paginate(booze)

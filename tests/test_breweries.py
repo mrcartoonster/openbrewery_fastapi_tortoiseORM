@@ -28,7 +28,7 @@ def test_by_city_passing(db):
     resp_json = response.json()
 
     # THEN assert city in response
-    assert resp_json[0]["city"] == "Miami"
+    assert resp_json["items"][0]["city"] == "Miami"
 
     # THEN assert quantity of response is equal to or less than 20
     assert len(resp_json) <= 50
@@ -70,7 +70,7 @@ def test_by_type_passing(db, brewenums):
     response_dict = response.json()
 
     # THEN assert correct brewery type in response
-    for _ in response_dict[:-1]:
+    for _ in response_dict["items"][:-1]:
         assert _["brewery_type"] == brewenums
 
 
@@ -132,7 +132,7 @@ def test_by_name_passing(db):
     response_dict = response.json()
 
     # THEN assert brewery search name is returned
-    for _ in response_dict[:-1]:
+    for _ in response_dict["items"][:-1]:
         assert re.search("[Ss]el", _["name"])
 
 
@@ -154,7 +154,7 @@ def test_by_state_passing(db):
     response_dict = response.json()
 
     # THEN assert brewery response only contains requested state
-    assert response_dict[0]["state"] == "Florida"
+    assert response_dict["items"][0]["state"] == "Florida"
 
 
 def test_by_state_failing(db):
@@ -197,7 +197,7 @@ def test_by_postal_code_passing(db):
     response_dict = response.json()
 
     # THEN assert zip code is in respsone
-    assert response_dict[0]["postal_code"] == "92121-4396"
+    assert response_dict["items"][0]["postal_code"] == "92121-4396"
 
 
 def test_by_postal_code_regex_failing(db):
