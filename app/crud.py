@@ -54,11 +54,11 @@ async def get(id: int) -> Optional[dict]:
         return None
 
 
-async def search(term: str, per_page: int) -> Optional[dict]:
+async def search(term: str) -> Optional[dict]:
     """
     Helper ORM function to get search term.
     """
-    item = await Brewery.filter(name__icontains=term).limit(per_page)
+    item = await Brewery.filter(name__icontains=term).values()
 
     if item:
         return item

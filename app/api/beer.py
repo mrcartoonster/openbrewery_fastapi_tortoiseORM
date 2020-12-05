@@ -3,10 +3,12 @@
 Location of breweries endpoints.
 """
 import sys
-from typing import List, Optional
+from typing import Optional
 
 from environs import Env
-from fastapi import APIRouter, HTTPException, Path, Query
+from fastapi import APIRouter, Depends, HTTPException, Path, Query
+from fastapi_pagination import Page, pagination_params
+from fastapi_pagination.ext.tortoise import paginate
 from loguru import logger
 from tortoise.queryset import QuerySet
 
@@ -36,8 +38,9 @@ logger.add(
 
 @router.get(
     "/",
-    response_model=List[BrewerySchema],
+    response_model=Page[BrewerySchema],
     response_model_exclude_none=True,
+    dependencies=[Depends(pagination_params)],
 )
 async def breweries(
     by_city: Optional[str] = Query(
@@ -63,19 +66,14 @@ async def breweries(
         None,
         description=brew_type,
     ),
-    per_page: int = Query(
-        50,
-        description="Number of breweries per page.",
-        le=100,
-    ),
     sort: Optional[str] = Query(
         None,
         description="Sort the results by one field.",
         regex=r"^(-)?[inbsacplwu]\w.+|(-)?id",
     ),
-) -> List[BrewerySchema]:
+) -> Page[BrewerySchema]:
     """
-    Returns a list of breweries.
+    Returns a Page of breweries.
     """
     log.info("Brewery called")
     logger.info("Brewery called")
@@ -102,17 +100,17 @@ async def breweries(
             if isinstance(booze, QuerySet) is False:
                 booze = beer.filter(
                     city=by_city.title(),
-                ).limit(per_page)
+                )
 
             elif booze.exists():
                 booze = booze.filter(city=by_city.title())
 
             else:
-                booze = booze.filter(city=by_city.title()).limit(per_page)
+                booze = booze.filter(city=by_city.title())
 
         if by_type:
 
-            if by_type not in list(BrewEnum):
+            if by_type not in Page(BrewEnum):
 
                 raise HTTPException(
                     status_code=422,
@@ -121,29 +119,29 @@ async def breweries(
             log.info(f"{by_type}")
 
             if isinstance(booze, QuerySet) is False:
-                booze = beer.filter(brewery_type=by_type).limit(per_page)
+                booze = beer.filter(brewery_type=by_type)
 
             elif booze.exists():
-                booze = booze.filter(brewery_type=by_type).limit(per_page)
+                booze = booze.filter(brewery_type=by_type)
                 log.info(f"{booze} is already exists")
 
             else:
-                booze = booze.filter(brewery_type=by_type).limit(per_page)
+                booze = booze.filter(brewery_type=by_type)
 
         if by_name:
 
             if isinstance(booze, QuerySet) is False:
                 booze = beer.filter(
                     name__icontains=by_name,
-                ).limit(per_page)
+                )
                 log.info(f"{booze} doesn't exist.")
                 log.info(f"The name is {by_name}")
 
             elif booze.exists():
-                booze = booze.filter(name__icontains=by_name).limit(per_page)
+                booze = booze.filter(name__icontains=by_name)
 
             else:
-                booze = booze.filter(name__icontains=by_name).limit(per_page)
+                booze = booze.filter(name__icontains=by_name)
 
         if by_state:
 
@@ -157,34 +155,28 @@ async def breweries(
                 )
 
             if isinstance(booze, QuerySet) is False:
-                booze = beer.filter(state=by_state.title()).limit(per_page)
+                booze = beer.filter(state=by_state.title())
 
             elif booze.exists():
-                booze = booze.filter(state=by_state.title()).limit(per_page)
+                booze = booze.filter(state=by_state.title())
 
             else:
-                booze = booze.filter(state=by_state.title()).limit(per_page)
+                booze = booze.filter(state=by_state.title())
 
         if by_postal:
 
             if isinstance(booze, QuerySet) is False:
-                booze = beer.filter(postal_code__icontains=by_postal).limit(
-                    per_page,
-                )
+                booze = beer.filter(postal_code__icontains=by_postal)
 
             elif booze.exists():
-                booze = booze.filter(postal_code__icontains=by_postal).limit(
-                    per_page,
-                )
+                booze = booze.filter(postal_code__icontains=by_postal)
 
             else:
-                booze = booze.filter(postal_code__icontains=by_postal).limit(
-                    per_page,
-                )
+                booze = booze.filter(postal_code__icontains=by_postal)
 
         if sort:
 
-            if sort.replace("-", "") not in list(FieldEnum):
+            if sort.replace("-", "") not in Page(FieldEnum):
                 raise HTTPException(
                     status_code=400,
                     detail=(
@@ -194,18 +186,18 @@ async def breweries(
                 )
 
             if isinstance(booze, QuerySet) is False:
-                booze = beer.all().order_by(*order(sort)).limit(per_page)
+                booze = beer.all().order_by(*order(sort))
 
             elif booze.exists():
-                booze = booze.order_by(*order(sort)).limit(per_page)
+                booze = booze.order_by(*order(sort))
 
             else:
-                booze = booze.order_by(*order(sort)).limit(per_page)
+                booze = booze.order_by(*order(sort))
 
-        return await booze
+        return await paginate(booze)
 
     else:
-        return await beer.all().limit(per_page)
+        return await paginate(beer.all())
 
 
 @router.get(
@@ -238,28 +230,26 @@ async def get_breweries(
 
 @router.get(
     "/search",
-    response_model=List[BrewerySchema],
+    response_model=Page[BrewerySchema],
     response_model_exclude_none=True,
+    dependencies=[Depends(pagination_params)],
 )
 async def brewery_search(
     query: str = Query(
         ...,
-        title="Get a list of breweries with name search.",
+        title="Get a Page of breweries with name search.",
     ),
-    per_page: int = Query(
-        20,
-        title="Number of breweries returned",
-        le=50,
-    ),
-) -> List[BrewerySchema]:
+) -> Page[BrewerySchema]:
     """
     General search of brewery with search term.
     """
     log.info("Searching Breweries")
     logger.info("Searching Breweries")
 
+    booze = Brewery
+
     if query:
-        item = await crud.search(query, per_page)
+        item = await booze.filter(name__icontains=query)
 
         if not item:
             raise HTTPException(
@@ -272,4 +262,4 @@ async def brewery_search(
 
         else:
             logger.info("Returning search")
-            return item
+            return paginate(item)
