@@ -176,7 +176,7 @@ async def breweries(
 
         if sort:
 
-            if sort.replace("-", "") not in Page(FieldEnum):
+            if sort.replace("-", "") not in list(FieldEnum):
                 raise HTTPException(
                     status_code=400,
                     detail=(
@@ -246,20 +246,20 @@ async def brewery_search(
     log.info("Searching Breweries")
     logger.info("Searching Breweries")
 
-    booze = Brewery
-
     if query:
-        item = await booze.filter(name__icontains=query)
+        # booze = await crud.search(query)
+        booze = Brewery.filter(name__icontains=query)
 
-        if not item:
+        if not booze:
             raise HTTPException(
                 status_code=404,
                 detail=f"'{query}' didn't return anything.",
             )
 
-            log.info(f"Not {item}")
-            logger.info(f"Not {item}")
+            log.info(f"Not {booze}")
+            logger.info(f"Not {booze}")
 
         else:
             logger.info("Returning search")
-            return paginate(item)
+            # return paginate(booze)
+            return await paginate(booze)

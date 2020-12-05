@@ -58,7 +58,7 @@ async def search(term: str) -> Optional[dict]:
     """
     Helper ORM function to get search term.
     """
-    item = await Brewery.filter(name__icontains=term).values()
+    item = await Brewery.filter(name__icontains=term)
 
     if item:
         return item
