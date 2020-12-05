@@ -28,7 +28,7 @@ logger.add(
 
 
 logger.add(
-    "../logs/logged_{time:YYYY-MM-DD at hh:mm:ss A zz}",
+    "./logs/logged_{time:YYYY-MM-DD at hh:mm:ss A zz}",
     rotation="2 days",
 )
 

@@ -27,7 +27,7 @@ logger.add(
 )
 
 logger.add(
-    "logs/logged_{time:YY-MM-DD}",
+    "./logs/logged_{time:YY-MM-DD}",
     rotation="2 days",
 )
 
@@ -48,7 +48,7 @@ def create_app() -> FastAPI:
     # API endpoints
     app.include_router(ping.router, tags=["ping"])
     app.include_router(beer.router, prefix="/breweries", tags=["beer"])
-    app.include_router(sponsors.router, prefix="/sponsors", tags=["sponsor"])
+    app.include_router(sponsors.router, prefix="/sponsors", tags=["sponsors"])
 
     # Middlewares
 
