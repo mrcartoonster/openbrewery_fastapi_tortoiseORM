@@ -115,4 +115,31 @@ class Brewery(Model):
         """
 
 
+@dataclass
+class Sponsor(Model):
+    """
+    This model class will represent the sponsors table. It is not
+    related to any other table.
+
+    Below are the attribute fields:
+        id: int = Primary Key
+        sponsor_name: str = Name of Sponsors
+        github_repo: httpurl = Sponsor's GitHub profile
+
+    """
+
+    id: int = fields.IntField(pk=True)
+    sponsor_name: str = fields.CharField(max_length=200)
+    github_repo: str = fields.CharField(max_length=200)
+
+    class Meta:
+        """
+        Table information for Sponsors Model.
+        """
+
+        table = "sponsors"
+        description = "GitHub sponsors table."
+
+
 BrewerySchema = pydantic_model_creator(Brewery, name="Brewery")
+SponsorSchema = pydantic_model_creator(Sponsor, name="Sponsor")
