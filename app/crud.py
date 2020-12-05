@@ -52,16 +52,3 @@ async def get(id: int) -> Optional[dict]:
 
     else:
         return None
-
-
-async def search(term: str) -> Optional[dict]:
-    """
-    Helper ORM function to get search term.
-    """
-    item = Brewery.filter(name__icontains=term)
-
-    if item:
-        return item
-
-    else:
-        return None
