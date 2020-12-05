@@ -10,7 +10,7 @@ from environs import Env
 from fastapi import FastAPI
 from loguru import logger
 
-from app.api import beer, ping
+from app.api import beer, ping, sponsors
 from app.db import init_db
 from app.log import log
 
@@ -48,6 +48,7 @@ def create_app() -> FastAPI:
     # API endpoints
     app.include_router(ping.router, tags=["ping"])
     app.include_router(beer.router, prefix="/breweries", tags=["beer"])
+    app.include_router(sponsors.router, prefix="/sponsors", tags=["sponsor"])
 
     # Middlewares
 

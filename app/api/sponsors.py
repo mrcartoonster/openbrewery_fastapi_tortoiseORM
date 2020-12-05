@@ -12,7 +12,7 @@ from loguru import logger
 
 from app.desc import fmt
 from app.log import log
-from app.models import Sponsor
+from app.models.tortoise import Sponsor, SponsorSchema
 
 router = APIRouter()
 
@@ -35,7 +35,7 @@ logger.add(
 
 @router.get(
     "/",
-    response_model=Page[Sponsor],
+    response_model=Page[SponsorSchema],
     dependencies=[Depends(pagination_params)],
 )
 async def sponsor() -> Page[Sponsor]:

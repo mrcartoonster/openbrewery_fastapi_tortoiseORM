@@ -142,4 +142,4 @@ class Sponsor(Model):
 
 
 BrewerySchema = pydantic_model_creator(Brewery, name="Brewery")
-SponsorsSchema = pydantic_model_creator(Sponsor, name="Sponsor")
+SponsorSchema = pydantic_model_creator(Sponsor, name="Sponsor")
