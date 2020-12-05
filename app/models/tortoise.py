@@ -7,7 +7,6 @@ from datetime import datetime
 from enum import Enum, unique
 from typing import Optional
 
-from pydantic import AnyHttpUrl
 from tortoise import fields
 from tortoise.contrib.pydantic import pydantic_model_creator
 from tortoise.models import Model
@@ -117,7 +116,7 @@ class Brewery(Model):
 
 
 @dataclass
-class Sponsors(Model):
+class Sponsor(Model):
     """
     This model class will represent the sponsors table. It is not
     related to any other table.
@@ -131,7 +130,7 @@ class Sponsors(Model):
 
     id: int = fields.IntField(pk=True)
     sponsor_name: str = fields.CharField(max_length=200)
-    github_repo: AnyHttpUrl = fields.CharField(max_length=200)
+    github_repo: str = fields.CharField(max_length=200)
 
     class Meta:
         """
@@ -143,4 +142,4 @@ class Sponsors(Model):
 
 
 BrewerySchema = pydantic_model_creator(Brewery, name="Brewery")
-SponsorsSchema = pydantic_model_creator(Sponsors, name="Sponsors")
+SponsorsSchema = pydantic_model_creator(Sponsor, name="Sponsor")
