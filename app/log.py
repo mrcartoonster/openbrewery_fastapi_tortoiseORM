@@ -20,7 +20,6 @@ log.setLevel(logging.INFO)
 env = Env()
 env.read_env()
 
-key = env("LOGDNA")
 source = env("SOURCE")
 timber_key = env("TIMBER")
 sentry = env("DSN")
