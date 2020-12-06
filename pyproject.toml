@@ -19,6 +19,7 @@ python-dotenv = "^0.15.0"
 email-validator = "^1.1.2"
 timber = "^2.1.0"
 fastapi-pagination = {extras = ["tortoise"], version = "^0.4.1"}
+aerich = "^0.4.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
