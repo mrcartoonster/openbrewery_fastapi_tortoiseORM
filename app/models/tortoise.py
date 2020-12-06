@@ -130,7 +130,7 @@ class Sponsor(Model):
 
     id: int = fields.IntField(pk=True)
     sponsor_name: str = fields.CharField(max_length=200)
-    github_repo: str = fields.CharField(max_length=200)
+    github_id: str = fields.CharField(max_length=200)
 
     class Meta:
         """

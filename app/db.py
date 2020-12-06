@@ -11,6 +11,19 @@ env = Env()
 env.read_env()
 
 
+TORTOISE_ORM = {
+    "connections": {
+        "default": env("DATABASE_URL"),
+    },
+    "apps": {
+        "models": {
+            "models": ["app.models.tortoise", "aerich.models"],
+            "default_connection": "default",
+        },
+    },
+}
+
+
 def init_db(app: FastAPI) -> None:
     """
     Function to register tortoise model.
@@ -29,7 +42,7 @@ async def generate_schema() -> None:
     Tortoise async schema creation.
     """
     await Tortoise.init(
-        db_url=env("DEV_DB"),
+        db_url=env("DATABASE_URL"),
         modules={"models": ["models.tortoise"]},
     )
     await Tortoise.generate_schemas()
