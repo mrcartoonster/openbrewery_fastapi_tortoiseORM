@@ -69,12 +69,12 @@ dnspython==2.0.0; python_version >= "3.6" \
 email-validator==1.1.2 \
     --hash=sha256:1a13bd6050d1db4475f13e444e169b6fe872434922d38968c67cea9568cce2f0 \
     --hash=sha256:094b1d1c60d790649989d38d34f69e1ef07792366277a2cf88684d03495d018f
-fastapi-pagination==0.4.1; python_version >= "3.7" and python_version < "4.0" \
-    --hash=sha256:6c8a766dc0ddde34dc509f3e6b605e505e1a5d8f329a8b9c28dff4014d1de5a8 \
-    --hash=sha256:7340359e4df414907969e1787c1c887eb7eb045ad13f76b57dc93946e5daa30d
 fastapi==0.61.2; python_version >= "3.6" \
     --hash=sha256:8c8517680a221e69eb34073adf46c503092db2f24845b7bdc7f85b54f24ff0df \
     --hash=sha256:9e0494fcbba98f85b8cc9b2606bb6b625246e1b12f79ca61f508b0b00843eca6
+fastapi-pagination==0.4.1; python_version >= "3.7" and python_version < "4.0" \
+    --hash=sha256:6c8a766dc0ddde34dc509f3e6b605e505e1a5d8f329a8b9c28dff4014d1de5a8 \
+    --hash=sha256:7340359e4df414907969e1787c1c887eb7eb045ad13f76b57dc93946e5daa30d
 graphene==2.1.8; python_version >= "3.7" and python_version < "4.0" \
     --hash=sha256:09165f03e1591b76bf57b133482db9be6dac72c74b0a628d3c93182af9c5a896 \
     --hash=sha256:2cbe6d4ef15cfc7b7805e0760a0e5b80747161ce1b0f990dfdc0d2cf497c12f9
