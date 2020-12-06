@@ -19,6 +19,7 @@ fastapi-pagination = {extras = ["tortoise"], version = "^0.4.1"}
 aerich = "^0.4.2"
 pytest = "^6.1.2"
 environs = "^9.2.0"
+loguru = "^0.5.3"
 
 [tool.poetry.dev-dependencies]
 pytest-picked = "^0.4.4"
@@ -50,7 +51,6 @@ trio = "^0.17.0"
 segno = "^1.3.1"
 qrcode-artistic = "^2.1.0"
 Pillow = "^8.0.1"
-loguru = "^0.5.3"
 
 [tool.pytest.ini_options]
 addopts = "-rssxX -l --tb=short --strict --randomly-seed=last --diff-type=split --emoji -vvv -p no:warnings"

@@ -30,6 +30,7 @@ iniconfig==1.1.1; python_version >= "3.5"
 iso8601==0.1.13; python_version >= "3.7" and python_version < "4.0"
 itsdangerous==1.1.0; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.4.0"
 jinja2==2.11.2; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.5.0"
+loguru==0.5.3; python_version >= "3.5"
 markupsafe==1.1.1; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.5.0"
 marshmallow==3.9.1; python_version >= "3.6"
 msgpack==1.0.0
@@ -66,3 +67,4 @@ urllib3==1.26.2; python_version >= "3.7" and python_full_version < "3.0.0" and p
 uvicorn==0.11.8; python_version >= "3.7" and python_version < "4.0"
 uvloop==0.14.0; sys_platform != "win32" and sys_platform != "cygwin" and platform_python_implementation != "PyPy" and python_version >= "3.7" and python_version < "4.0"
 websockets==8.1; python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.6.1"
+win32-setctime==1.0.3; sys_platform == "win32" and python_version >= "3.5"
