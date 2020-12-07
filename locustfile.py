@@ -69,3 +69,10 @@ class OpenBreweryUser(HttpUser):
         Stress test by search.
         """
         self.client.get("/breweries/search", params={"query": "dog"})
+
+    @task()
+    def sponsors(self):
+        """
+        Test the sponsors endpoint.
+        """
+        self.client.get("/sponsors")
