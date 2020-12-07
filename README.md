@@ -2,7 +2,7 @@
 
 ![interrogate](img/interrogate_badge.svg) ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-# OpenBreweryDB Clone in FastAPI :beers:!
+# OpenBreweryDB Clone in FastAPI :beers:
 
 Welcome to my FastAPI clone of the cool [OpenBreweryDB](https://www.openbrewerydb.org/) API. This is my first FastAPI app that's been deployed into the wild. With that said, it's an MVP(Minimum Viable Product). It hasn't been fully tested in TDD and may fall apart due to it has yet to be ultimately stress tested. Currently stress testing it with the use of [Locust](https://locust.io/). If the app does fall apart, you're more than welcome to open an [issue](https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM/issues) and I will respond letting you know when it's fixed.
 
@@ -27,7 +27,7 @@ This app is hosted and deployed on Digital Ocean's [App Platform](https://www.di
 
 This app is also using [Fathom](https://usefathom.com/ref/QZWVPY), which is a GDPR, PECR and CCPA compliant Open Sourced Analytics framework. Really loving the breadth and simplicity of this software. If you want to keep your visitors infomation private and not track private information, try [Fathom](https://usefathom.com/ref/QZWVPY) out for free and use my [link](https://usefathom.com/ref/QZWVPY) to get \$10 off you first month. Also, Fathom has a Digital Ocean Droplet ready to go. Again use my [Digital Ocean link](https://m.do.co/c/beef14f5483f) to get $100 credit for the first 60 days to try out that Fathom droplet.
 
-## Learn FastAPI Too 📝!
+## Learn FastAPI Too 📝
 
 If you haven't heard of `FastAPI`, it's a smooth Web Framework that's ...high performance, easy to learn, fast to code, ready for production. The [documetation](https://fastapi.tiangolo.com/) is expansive and you should be up and running with it in less than a day. I took a course on FastAPI via [TestDrivenIO](https://testdriven.io/courses/tdd-fastapi/?utm_source=mrcartoonster). TestDrivenIO's [FastAPI](https://testdriven.io/courses/tdd-fastapi/?utm_source=mrcartoonster) course will guide you on how to build a Restful-API ML model with Docker practicing TDD and pushing up to Heroku with a GitHub Actions CI. This course has hidden Gems that I'll be using in my future FastAPI apps like [TortoiseORM](https://tortoise-orm.readthedocs.io/en/latest/), currently used in this app, and [NewsPaper3k](https://newspaper.readthedocs.io/en/latest/) for text summerization and scraping! If you're interested in TestDrivenIO's FastAPI course, you'll need to know a bit of FastAPI. If you can loop and know all the methods of a Python [dictionary](https://docs.python.org/3/library/stdtypes.html?highlight=dict#mapping-types-dict) you can cruise through the first three sections of FastAPI documentation. Or you can learn it in style with Calmcode.io's [FastAPI](https://calmcode.io/fastapi/hello-world.html) free video course in less that half-n-hour.
 
