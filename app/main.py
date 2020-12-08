@@ -4,31 +4,17 @@
 This is where our FastAPI endpoint routers from sponsors and beers are
 served.
 """
-import sys
 
 from environs import Env
 from fastapi import FastAPI
-from loguru import logger
 
 from app.api import beer, sponsors
 from app.db import init_db
 
-from .desc import desc, fmt
+from .desc import desc
 
 env = Env()
 env.read_env()
-
-
-logger.add(
-    sys.stderr,
-    format=fmt,
-    level="INFO",
-)
-
-logger.add(
-    "./logs/logged_{time:YY-MM-DD}",
-    rotation="2 days",
-)
 
 
 def create_app() -> FastAPI:
@@ -58,7 +44,6 @@ def create_app() -> FastAPI:
     # https://fastapi.tiangolo.com/advanced/middleware/#trustedhostmiddleware
 
     # logger testings
-    logger.info("FastAPI created")
     return app
 
 
@@ -70,7 +55,6 @@ async def startup():
     """
     Starting up tortoise for FastAPI.
     """
-    logger.info("Database starting up")
     init_db(app)
 
 
@@ -79,5 +63,4 @@ async def shutdown():
     """
     Proper shutdown of Tortoise and Event loop.
     """
-    logger.info("Shuttin down Database")
     ...
