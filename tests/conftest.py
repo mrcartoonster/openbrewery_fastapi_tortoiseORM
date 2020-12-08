@@ -79,7 +79,7 @@ def db():
     app.dependency_overrides[get_settings] = get_settings_override
     register_tortoise(
         app,
-        db_url=env("DATABASE_URL"),
+        db_url=env("DEV_URL"),
         modules={"models": ["app.models.tortoise"]},
         generate_schemas=True,
         add_exception_handlers=True,
