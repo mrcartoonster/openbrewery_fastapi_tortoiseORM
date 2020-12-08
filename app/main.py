@@ -12,7 +12,6 @@ from loguru import logger
 
 from app.api import beer, sponsors
 from app.db import init_db
-from app.log import log
 
 from .desc import desc, fmt
 
@@ -59,7 +58,6 @@ def create_app() -> FastAPI:
     # https://fastapi.tiangolo.com/advanced/middleware/#trustedhostmiddleware
 
     # logger testings
-    log.info("FastAPI created")
     logger.info("FastAPI created")
     return app
 
@@ -72,7 +70,7 @@ async def startup():
     """
     Starting up tortoise for FastAPI.
     """
-    log.info("Database startup")
+    logger.info("Database starting up")
     init_db(app)
 
 
@@ -81,5 +79,5 @@ async def shutdown():
     """
     Proper shutdown of Tortoise and Event loop.
     """
-    log.info("Database shutdown")
+    logger.info("Shuttin down Database")
     ...

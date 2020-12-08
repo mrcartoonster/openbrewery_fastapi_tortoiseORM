@@ -11,7 +11,6 @@ from fastapi_pagination.ext.tortoise import paginate
 from loguru import logger
 
 from app.desc import fmt
-from app.log import log
 from app.models.tortoise import Sponsor, SponsorSchema
 
 router = APIRouter()
@@ -42,6 +41,6 @@ async def sponsor() -> Page[Sponsor]:
     """
     Returns all sponsors.
     """
-    log.info("Returning Sponsors")
+    logger.info("Returning Sponsors")
     logger.info("Returning Sponsors")
     return await paginate(Sponsor)

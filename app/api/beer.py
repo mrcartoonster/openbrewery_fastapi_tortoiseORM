@@ -15,7 +15,6 @@ from tortoise.queryset import QuerySet
 from app import crud
 from app.crud import FieldEnum, order
 from app.desc import brew_type, fmt
-from app.log import log
 from app.models.tortoise import BrewEnum, Brewery, BrewerySchema
 
 router = APIRouter()
@@ -75,7 +74,6 @@ async def breweries(
     """
     Returns a Page of breweries.
     """
-    log.info("Brewery called")
     logger.info("Brewery called")
 
     # TODO Refactor to make this DRY
@@ -86,7 +84,7 @@ async def breweries(
 
         if by_city:
 
-            log.info(f"The city is {by_city}")
+            logger.info(f"The city is {by_city}")
 
             if by_city.title() not in await beer.all().distinct().values_list(
                 "city",
@@ -116,14 +114,14 @@ async def breweries(
                     status_code=422,
                     detail=f"{by_type} is not a brewery type.",
                 )
-            log.info(f"{by_type}")
+            logger.info(f"{by_type}")
 
             if isinstance(booze, QuerySet) is False:
                 booze = beer.filter(brewery_type=by_type)
 
             elif booze.exists():
                 booze = booze.filter(brewery_type=by_type)
-                log.info(f"{booze} is already exists")
+                logger.info(f"{booze} is already exists")
 
             else:
                 booze = booze.filter(brewery_type=by_type)
@@ -134,8 +132,6 @@ async def breweries(
                 booze = beer.filter(
                     name__icontains=by_name,
                 )
-                log.info(f"{booze} doesn't exist.")
-                log.info(f"The name is {by_name}")
 
             elif booze.exists():
                 booze = booze.filter(name__icontains=by_name)
@@ -214,7 +210,6 @@ async def get_breweries(
     """
     Get a single brewery.
     """
-    log.info("Getting Breweries")
     logger.info("Getting Breweries")
 
     idx = await crud.get(id)
@@ -243,7 +238,6 @@ async def brewery_search(
     """
     General search of brewery with search term.
     """
-    log.info("Searching Breweries")
     logger.info("Searching Breweries")
 
     if query:
@@ -255,7 +249,6 @@ async def brewery_search(
                 detail=f"'{query}' didn't return anything.",
             )
 
-            log.info(f"Not {booze}")
             logger.info(f"Not {booze}")
 
         else:

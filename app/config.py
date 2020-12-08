@@ -12,7 +12,6 @@ from loguru import logger
 from pydantic import BaseSettings, PostgresDsn
 
 from app.desc import fmt
-from app.log import log
 
 logger.add(
     sys.stderr,
@@ -36,7 +35,6 @@ class Settings(BaseSettings):
     database_url: PostgresDsn
 
     logger.info("Settings created")
-    log.info("Settings created")
 
     class Config:
         """
@@ -44,7 +42,6 @@ class Settings(BaseSettings):
         """
 
         logger.info("Getting .env")
-        log.info("Getting .env")
         env_file = Path(".env")
 
 
@@ -53,6 +50,5 @@ def get_settings() -> BaseSettings:
     """
     Dependency injection of settings.
     """
-    log.info("Loading config setting from environment.")
     logger.info("Loading config settings from environment")
     return Settings()
