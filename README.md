@@ -42,6 +42,7 @@ I'm going to keep this app live for two months to see the breaking points and to
 * Instgram at [@pizzamachinegun](https://www.instagram.com/pizzamachinegun/)
 * As well as email me at [mrcartoonster@fastmail.com](mrcartoonster@fastmail.com) for business and job inquiries.
 
+## Project Specifics
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
