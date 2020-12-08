@@ -11,7 +11,8 @@ import logging
 import sentry_sdk
 from environs import Env
 from sentry_sdk.integrations.logging import LoggingIntegration
-from timber import TimberHandler
+
+# from timber import TimberHandler
 
 log = logging.getLogger(__name__)
 
@@ -34,20 +35,20 @@ sentry_sdk.init(
     integrations=[sentry_logging],
 )
 
-shell_handler = logging.StreamHandler()
-timber_handler = TimberHandler(
-    source_id=source,
-    api_key=timber_key,
-)
+#   shell_handler = logging.StreamHandler()
+#   timber_handler = TimberHandler(
+#       source_id=source,
+#       api_key=timber_key,
+#   )
 
-shell_handler.setLevel(logging.DEBUG)
+#   shell_handler.setLevel(logging.DEBUG)
 
-fmt_shell = "%(levelname)s:     %(message)s"
+# fmt_shell = "%(levelname)s:     %(message)s"
 
-shell_formatter = logging.Formatter(fmt_shell)
+#   shell_formatter = logging.Formatter(fmt_shell)
 
-shell_handler.setFormatter(shell_formatter)
+#   shell_handler.setFormatter(shell_formatter)
 
 
-log.addHandler(shell_handler)
-log.addHandler(timber_handler)
+#   log.addHandler(shell_handler)
+#   log.addHandler(timber_handler)
