@@ -5,8 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Add logging with [loguru](https://loguru.readthedocs.io/en/stable/)
-- Add [Sentry](https://sentry.io/welcome/) logging
+- ~~Add logging with [loguru](https://loguru.readthedocs.io/en/stable/)~~
+- ~~Add [Sentry](https://sentry.io/welcome/) logging~~
 - Add [Timber.io](https://timber.io/) logging
 - Refactor [Settings & Environment Variables](https://fastapi.tiangolo.com/advanced/settings/)
 - Add [Pagination](https://github.com/uriyyo/fastapi-pagination)
