@@ -13,7 +13,7 @@ env.read_env()
 
 TORTOISE_ORM = {
     "connections": {
-        "default": env("DB"),
+        "default": env("DATABASE_URL"),
     },
     "apps": {
         "models": {
@@ -30,7 +30,7 @@ def init_db(app: FastAPI) -> None:
     """
     register_tortoise(
         app,
-        db_url=env("DB"),
+        DATABASE_URL_url=env("DATABASE_URL"),
         modules={"models": ["app.models.tortoise"]},
         generate_schemas=False,
         add_exception_handlers=True,
@@ -42,7 +42,7 @@ async def generate_schema() -> None:
     Tortoise async schema creation.
     """
     await Tortoise.init(
-        db_url=env("DB"),
+        DATABASE_URL_url=env("DATABASE_URL"),
         modules={"models": ["models.tortoise"]},
     )
     await Tortoise.generate_schemas()
