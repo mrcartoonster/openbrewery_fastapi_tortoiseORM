@@ -49,3 +49,5 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 This project keeps a [CHANGELOG](CHANGELOG.md)
 
 Project Licensed under [New BSD License](LICENSE)
+
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="mrcartoontser" data-color="#FF5F5F" data-emoji=""  data-font="Lato" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
