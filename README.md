@@ -49,5 +49,3 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 This project keeps a [CHANGELOG](CHANGELOG.md)
 
 Project Licensed under [New BSD License](LICENSE)
-
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/mrcartoontser)
