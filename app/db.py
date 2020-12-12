@@ -54,7 +54,7 @@ async def generate_schema() -> None:
                 "default": {
                     "engine": "tortoise.backends.asyncpg",
                     "credentials": {
-                        "database": env("DATABASE_URL"),
+                        "database": env("DATABASE"),
                         "host": (
                             "apidb-do-user-874037-0.b.db.ondigitalocean.com"
                         ),
