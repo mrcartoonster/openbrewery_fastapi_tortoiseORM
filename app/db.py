@@ -30,7 +30,7 @@ def init_db(app: FastAPI) -> None:
     """
     register_tortoise(
         app,
-        DATABASE_URL_url=env("DATABASE_URL"),
+        db_url=env("DATABASE_URL"),
         modules={"models": ["app.models.tortoise"]},
         generate_schemas=False,
         add_exception_handlers=True,
@@ -42,7 +42,7 @@ async def generate_schema() -> None:
     Tortoise async schema creation.
     """
     await Tortoise.init(
-        DATABASE_URL_url=env("DATABASE_URL"),
+        db_url=env("DATABASE_URL"),
         modules={"models": ["models.tortoise"]},
     )
     await Tortoise.generate_schemas()
