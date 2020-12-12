@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Tortoise.
-"""
+Tortoise initializer.
+ """
 import ssl
 from pathlib import Path
 
@@ -54,27 +54,25 @@ async def generate_schema() -> None:
                 "default": {
                     "engine": "tortoise.backends.asyncpg",
                     "credentials": {
-                        "database": None,
-                        "host": "127.0.0.1",
-                        "password": "moo",
-                        "port": 54321,
-                        "user": "postgres",
-                        "ssl": ctx,  # Here we pass in the SSL context
+                        "database": env("DATABASE_URL"),
+                        "host": (
+                            "apidb-do-user-874037-0.b.db.ondigitalocean.com"
+                        ),
+                        "password": env("PASSWORD"),
+                        "port": int(env("PORT")),
+                        "user": env("USER"),
+                        "ssl": ctx,
                     },
                 },
             },
             "apps": {
                 "models": {
-                    "models": ["some.models"],
+                    "models": ["models.tortoise"],
                     "default_connection": "default",
                 },
             },
         },
     )
-    #   await Tortoise.init(
-    #       db_url=env("DATABASE_URL"),
-    #       modules={"models": ["models.tortoise"]},
-    #   )
     await Tortoise.generate_schemas()
     await Tortoise.close_connections()
 
