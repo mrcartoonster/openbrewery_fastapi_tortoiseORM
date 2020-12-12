@@ -42,7 +42,7 @@ def init_db(app: FastAPI) -> None:
                 "default": {
                     "engine": "tortoise.backends.asyncpg",
                     "credentials": {
-                        "database": env("DATABASE"),
+                        "database": "brewery_6pcl",
                         "host": "oregon-postgres.render.com",
                         "password": env("PASSWORD"),
                         "port": int(env("PORT")),
