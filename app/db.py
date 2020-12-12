@@ -2,6 +2,9 @@
 """
 Tortoise.
 """
+import ssl
+from pathlib import Path
+
 from environs import Env
 from fastapi import FastAPI
 from tortoise import Tortoise, run_async
@@ -10,7 +13,11 @@ from tortoise.contrib.fastapi import register_tortoise
 env = Env()
 env.read_env()
 
+cert: Path = Path("ca-certificate.crt")
+ctx = ssl.create_default_context(cafile=cert.as_posix())
 
+
+# Migration setup for Aerich
 TORTOISE_ORM = {
     "connections": {
         "default": env("DATABASE_URL"),
@@ -42,9 +49,32 @@ async def generate_schema() -> None:
     Tortoise async schema creation.
     """
     await Tortoise.init(
-        db_url=env("DATABASE_URL"),
-        modules={"models": ["models.tortoise"]},
+        config={
+            "connections": {
+                "default": {
+                    "engine": "tortoise.backends.asyncpg",
+                    "credentials": {
+                        "database": None,
+                        "host": "127.0.0.1",
+                        "password": "moo",
+                        "port": 54321,
+                        "user": "postgres",
+                        "ssl": ctx,  # Here we pass in the SSL context
+                    },
+                },
+            },
+            "apps": {
+                "models": {
+                    "models": ["some.models"],
+                    "default_connection": "default",
+                },
+            },
+        },
     )
+    #   await Tortoise.init(
+    #       db_url=env("DATABASE_URL"),
+    #       modules={"models": ["models.tortoise"]},
+    #   )
     await Tortoise.generate_schemas()
     await Tortoise.close_connections()
 
