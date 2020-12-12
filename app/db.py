@@ -73,7 +73,7 @@ async def generate_schema() -> None:
                 "default": {
                     "engine": "tortoise.backends.asyncpg",
                     "credentials": {
-                        "database": env("DATABASE"),
+                        "database": "brewery_6pcl",
                         "host": "oregon-postgres.render.com",
                         "password": env("PASSWORD"),
                         "port": int(env("PORT")),
