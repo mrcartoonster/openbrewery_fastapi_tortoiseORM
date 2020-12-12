@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Tortoise initializer.
- """
+"""
 import ssl
 from pathlib import Path
 
@@ -37,8 +37,29 @@ def init_db(app: FastAPI) -> None:
     """
     register_tortoise(
         app,
-        db_url=env("DATABASE_URL"),
-        modules={"models": ["app.models.tortoise"]},
+        config={
+            "connections": {
+                "default": {
+                    "engine": "tortoise.backends.asyncpg",
+                    "credentials": {
+                        "database": env("DATABASE"),
+                        "host": (
+                            "apidb-do-user-874037-0.b.db.ondigitalocean.com"
+                        ),
+                        "password": env("PASSWORD"),
+                        "port": int(env("PORT")),
+                        "user": env("USER"),
+                        "ssl": ctx,
+                    },
+                },
+            },
+            "apps": {
+                "models": {
+                    "models": ["models.tortoise"],
+                    "default_connection": "default",
+                },
+            },
+        },
         generate_schemas=False,
         add_exception_handlers=True,
     )
