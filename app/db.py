@@ -3,7 +3,6 @@
 Tortoise initializer.
 """
 import ssl
-from pathlib import Path
 
 from environs import Env
 from fastapi import FastAPI
@@ -13,8 +12,9 @@ from tortoise.contrib.fastapi import register_tortoise
 env = Env()
 env.read_env()
 
-cert: Path = Path("ca-certificate.crt")
-ctx = ssl.create_default_context(cafile=cert.as_posix())
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
 
 
 # Migration setup for Aerich
@@ -43,10 +43,7 @@ def init_db(app: FastAPI) -> None:
                     "engine": "tortoise.backends.asyncpg",
                     "credentials": {
                         "database": env("DATABASE"),
-                        "host": (
-                            "app-9ae835e1-4e66-41e7-8f46-5338ce7cd463"
-                            "-do-user-874037-0.b.db.ondigitalocean.com"
-                        ),
+                        "host": "oregon-postgres.render.com",
                         "password": env("PASSWORD"),
                         "port": int(env("PORT")),
                         "user": env("USER"),
@@ -77,10 +74,7 @@ async def generate_schema() -> None:
                     "engine": "tortoise.backends.asyncpg",
                     "credentials": {
                         "database": env("DATABASE"),
-                        "host": (
-                            "app-9ae835e1-4e66-41e7-8f46-5338ce7cd463-"
-                            "do-user-874037-0.b.db.ondigitalocean.com"
-                        ),
+                        "host": "oregon-postgres.render.com",
                         "password": env("PASSWORD"),
                         "port": int(env("PORT")),
                         "user": env("USER"),
