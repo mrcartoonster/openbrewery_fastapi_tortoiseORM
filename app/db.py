@@ -44,7 +44,8 @@ def init_db(app: FastAPI) -> None:
                     "credentials": {
                         "database": env("DATABASE"),
                         "host": (
-                            "apidb-do-user-874037-0.b.db.ondigitalocean.com"
+                            "app-9ae835e1-4e66-41e7-8f46-5338ce7cd463"
+                            "-do-user-874037-0.b.db.ondigitalocean.com"
                         ),
                         "password": env("PASSWORD"),
                         "port": int(env("PORT")),
@@ -77,7 +78,8 @@ async def generate_schema() -> None:
                     "credentials": {
                         "database": env("DATABASE"),
                         "host": (
-                            "apidb-do-user-874037-0.b.db.ondigitalocean.com"
+                            "app-9ae835e1-4e66-41e7-8f46-5338ce7cd463-"
+                            "do-user-874037-0.b.db.ondigitalocean.com"
                         ),
                         "password": env("PASSWORD"),
                         "port": int(env("PORT")),
