@@ -18,17 +18,17 @@ ctx = ssl.create_default_context(cafile=cert.as_posix())
 
 
 # Migration setup for Aerich
-TORTOISE_ORM = {
-    "connections": {
-        "default": env("DATABASE_URL"),
-    },
-    "apps": {
-        "models": {
-            "models": ["app.models.tortoise", "aerich.models"],
-            "default_connection": "default",
-        },
-    },
-}
+#   TORTOISE_ORM = {
+#       "connections": {
+#           "default": env("DATABASE_URL"),
+#       },
+#       "apps": {
+#           "models": {
+#               "models": ["app.models.tortoise", "aerich.models"],
+#               "default_connection": "default",
+#           },
+#       },
+#   }
 
 
 def init_db(app: FastAPI) -> None:
