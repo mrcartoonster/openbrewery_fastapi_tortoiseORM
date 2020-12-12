@@ -55,7 +55,7 @@ def init_db(app: FastAPI) -> None:
             },
             "apps": {
                 "models": {
-                    "models": ["models.tortoise"],
+                    "models": ["app.models.tortoise"],
                     "default_connection": "default",
                 },
             },
@@ -88,7 +88,7 @@ async def generate_schema() -> None:
             },
             "apps": {
                 "models": {
-                    "models": ["models.tortoise"],
+                    "models": ["app.models.tortoise"],
                     "default_connection": "default",
                 },
             },
