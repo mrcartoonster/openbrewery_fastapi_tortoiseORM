@@ -15,8 +15,8 @@ colorama==0.4.4; python_version >= "3.6" and python_full_version < "3.0.0" and s
 dnspython==2.0.0; python_version >= "3.6"
 email-validator==1.1.2
 environs==9.2.0; python_version >= "3.6"
-fastapi-pagination==0.4.1; python_version >= "3.7" and python_version < "4.0"
 fastapi==0.61.2; python_version >= "3.6"
+fastapi-pagination==0.4.1; python_version >= "3.7" and python_version < "4.0"
 graphene==2.1.8; python_version >= "3.7" and python_version < "4.0"
 graphql-core==2.3.2; python_version >= "3.6"
 graphql-relay==2.0.1; python_version >= "3.6"
