@@ -42,10 +42,10 @@ def init_db(app: FastAPI) -> None:
                 "default": {
                     "engine": "tortoise.backends.asyncpg",
                     "credentials": {
-                        "database": "brewery_6pcl",
-                        "host": "oregon-postgres.render.com",
+                        "database": env("DATABASE"),
+                        "host": env("HOST"),
                         "password": env("PASSWORD"),
-                        "port": 5432,
+                        "port": int(env("PORT")),
                         "user": env("USER"),
                         "ssl": ctx,
                     },
@@ -73,10 +73,10 @@ async def generate_schema() -> None:
                 "default": {
                     "engine": "tortoise.backends.asyncpg",
                     "credentials": {
-                        "database": "brewery_6pcl",
-                        "host": "oregon-postgres.render.com",
+                        "database": env("DATABASE"),
+                        "host": env("HOST"),
                         "password": env("PASSWORD"),
-                        "port": 5432,
+                        "port": int(env("PORT")),
                         "user": env("USER"),
                         "ssl": ctx,
                     },
