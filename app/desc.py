@@ -18,7 +18,7 @@ Click here to go the OpenAPI docs to try this app out.
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/mrcartoonster/openbrewery_fastapi_tortoiseORM?style=social?link=https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM)
 ![GitHub issues](https://img.shields.io/github/issues/mrcartoonster/openbrewery_fastapi_tortoiseORM?style=social?link=https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM/issues)
-![GitHub Sponsors](https://img.shields.io/github/sponsors/mrcartoonster?style=social)
+![GitHub Sponsors](https://img.shields.io/github/sponsors/mrcartoonster)
 
 """
 
