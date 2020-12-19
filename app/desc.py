@@ -18,7 +18,8 @@ Click here to go the OpenAPI docs to try this app out.
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/mrcartoonster/openbrewery_fastapi_tortoiseORM?style=social?link=https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM)
 ![GitHub issues](https://img.shields.io/github/issues/mrcartoonster/openbrewery_fastapi_tortoiseORM?style=social?link=https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM/issues)
-![GitHub Sponsors](https://img.shields.io/github/sponsors/mrcartoonster)
+![GitHub Sponsors](https://img.shields.io/github/sponsors/mrcartoonster?link=https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM)
+![ReDoc](https://img.shields.io/badge/Re-Doc-%234A8BB3?link=https://www.opencervezadb.com/redoc)
 
 """
 
