@@ -12,15 +12,14 @@ You can read more about this project and ways to support by reading the
 project's `README.md` in it's official [repository](https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM)
 
 If you find any value in this app and use it frequently, please consider
-sponsoring the app to keep it going. Just click
-[here](https://github.com/sponsors/mrcartoonster) to become my GitHub sponsor
-for this project. Any amount helps. If you do sponsor this project, you will be
-added to the sponsor endpoint. Thank you.
+sponsoring the app to keep it going by clicking the GitHub Sponsor link below. Every bit helps!
 
 Click here to go the OpenAPI docs to try this app out.
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/mrcartoonster/openbrewery_fastapi_tortoiseORM?style=social?link=https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM)
 ![GitHub issues](https://img.shields.io/github/issues/mrcartoonster/openbrewery_fastapi_tortoiseORM?style=social?link=https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM/issues)
+![GitHub Sponsors](https://img.shields.io/github/sponsors/mrcartoonster?style=social)
+
 """
 
 brew_type = """
