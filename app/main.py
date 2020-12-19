@@ -24,10 +24,10 @@ def create_app() -> FastAPI:
 
     # FastAPI instance
     app = FastAPI(
-        title="OpenBrewery",
+        title="OpenCerveza",
         description=desc,
         version="0.0.1",
-        redoc_url="/",
+        docs_url="/",
     )
 
     # API endpoints

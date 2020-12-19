@@ -4,12 +4,10 @@ Description for the docs and redocs page.
 """
 
 desc = r"""
-# OpenBreweryDB
+# OpenCervezaDB
 ---
 
-This is a [FastAPI]() clone of the [OpenBreweryDB](https://www.openbrewerydb.org/).
-If you have any issues with this app, you're welcome to open an issue in the
-GitHub repository [here](https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM/issues).
+This is a [FastAPI](https://fastapi.tiangolo.com/) clone of the [OpenBreweryDB](https://www.openbrewerydb.org/).
 You can read more about this project and ways to support by reading the
 project's `README.md` in it's official [repository](https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM)
 
@@ -21,6 +19,8 @@ added to the sponsor endpoint. Thank you.
 
 Click here to go the OpenAPI docs to try this app out.
 
+![GitHub Repo stars](https://img.shields.io/github/stars/mrcartoonster/openbrewery_fastapi_tortoiseORM?style=social?link=https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM)
+![GitHub issues](https://img.shields.io/github/issues/mrcartoonster/openbrewery_fastapi_tortoiseORM?style=social?link=https://github.com/mrcartoonster/openbrewery_fastapi_tortoiseORM/issues)
 """
 
 brew_type = """

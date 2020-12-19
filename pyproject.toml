@@ -20,6 +20,7 @@ aerich = "^0.4.2"
 pytest = "^6.1.2"
 environs = "^9.2.0"
 loguru = "^0.5.3"
+strictyaml = "^1.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest-picked = "^0.4.4"

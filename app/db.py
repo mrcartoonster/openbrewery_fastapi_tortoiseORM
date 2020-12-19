@@ -46,7 +46,7 @@ def init_db(app: FastAPI) -> None:
                         "host": env("HOST"),
                         "password": env("PASSWORD"),
                         "port": int(env("PORT")),
-                        "user": env("USER"),
+                        "user": env("DB_USER"),
                         "ssl": ctx,
                     },
                 },
@@ -77,7 +77,11 @@ async def generate_schema() -> None:
                         "host": env("HOST"),
                         "password": env("PASSWORD"),
                         "port": int(env("PORT")),
+<<<<<<< HEAD
                         "user": env("USER"),
+=======
+                        "user": env("DB_USER"),
+>>>>>>> BEER-30-re-deploy
                         "ssl": ctx,
                     },
                 },
